@@ -9,7 +9,6 @@
 import Foundation
 
 class WeatherError: Codable {
-    let stat: String
-    let code: Int
+    let cod: Int
     let message: String
 }
