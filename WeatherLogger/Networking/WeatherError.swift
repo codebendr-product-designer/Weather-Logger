@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+class WeatherError: Codable {
+    let stat: String
+    let code: Int
+    let message: String
+}

@@ -19,6 +19,7 @@
 		9F7029422364641A00770F64 /* Rest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7029412364641A00770F64 /* Rest.swift */; };
 		9F7029442364642900770F64 /* WeatherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7029432364642900770F64 /* WeatherError.swift */; };
 		9F7029462364643C00770F64 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7029452364643C00770F64 /* Response.swift */; };
+		9F7029482364657800770F64 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7029472364657800770F64 /* Results.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		9F7029412364641A00770F64 /* Rest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rest.swift; sourceTree = "<group>"; };
 		9F7029432364642900770F64 /* WeatherError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherError.swift; sourceTree = "<group>"; };
 		9F7029452364643C00770F64 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		9F7029472364657800770F64 /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				9F7029412364641A00770F64 /* Rest.swift */,
 				9F7029432364642900770F64 /* WeatherError.swift */,
 				9F7029452364643C00770F64 /* Response.swift */,
+				9F7029472364657800770F64 /* Results.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				9F702927236461B500770F64 /* ViewController.swift in Sources */,
 				9F702923236461B500770F64 /* AppDelegate.swift in Sources */,
 				9F7029422364641A00770F64 /* Rest.swift in Sources */,
+				9F7029482364657800770F64 /* Results.swift in Sources */,
 				9F7029462364643C00770F64 /* Response.swift in Sources */,
 				9F7029402364640F00770F64 /* RestManager.swift in Sources */,
 				9F70292D236461B500770F64 /* WeatherLogger.xcdatamodeld in Sources */,
