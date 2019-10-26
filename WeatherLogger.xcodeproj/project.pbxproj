@@ -58,6 +58,10 @@
 		9F702921236461B500770F64 /* WeatherLogger */ = {
 			isa = PBXGroup;
 			children = (
+				9F70293C236463A900770F64 /* Controller */,
+				9F70293B236463A300770F64 /* Model */,
+				9F70293A2364636F00770F64 /* Views */,
+				9F7029392364634E00770F64 /* Networking */,
 				9F702922236461B500770F64 /* AppDelegate.swift */,
 				9F702924236461B500770F64 /* SceneDelegate.swift */,
 				9F702926236461B500770F64 /* ViewController.swift */,
@@ -68,6 +72,34 @@
 				9F70292B236461B500770F64 /* WeatherLogger.xcdatamodeld */,
 			);
 			path = WeatherLogger;
+			sourceTree = "<group>";
+		};
+		9F7029392364634E00770F64 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		9F70293A2364636F00770F64 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9F70293B236463A300770F64 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9F70293C236463A900770F64 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
