@@ -123,4 +123,8 @@ enum Description: String, Codable {
     case overcastClouds = "overcast clouds"
 }
 
-
+// MARK: - Wind
+struct Wind: Codable {
+    let speed: Double
+    let deg: Int
+}
