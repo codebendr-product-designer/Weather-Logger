@@ -20,6 +20,7 @@
 		9F7029442364642900770F64 /* WeatherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7029432364642900770F64 /* WeatherError.swift */; };
 		9F7029462364643C00770F64 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7029452364643C00770F64 /* Response.swift */; };
 		9F7029482364657800770F64 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7029472364657800770F64 /* Results.swift */; };
+		9F70294A2364693E00770F64 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7029492364693E00770F64 /* Weather.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		9F7029432364642900770F64 /* WeatherError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherError.swift; sourceTree = "<group>"; };
 		9F7029452364643C00770F64 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		9F7029472364657800770F64 /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
+		9F7029492364693E00770F64 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		9F70293B236463A300770F64 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9F7029492364693E00770F64 /* Weather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				9F70293E236463FF00770F64 /* WeatherClient.swift in Sources */,
 				9F702927236461B500770F64 /* ViewController.swift in Sources */,
 				9F702923236461B500770F64 /* AppDelegate.swift in Sources */,
+				9F70294A2364693E00770F64 /* Weather.swift in Sources */,
 				9F7029422364641A00770F64 /* Rest.swift in Sources */,
 				9F7029482364657800770F64 /* Results.swift in Sources */,
 				9F7029462364643C00770F64 /* Response.swift in Sources */,
