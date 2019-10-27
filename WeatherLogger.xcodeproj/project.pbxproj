@@ -10,9 +10,12 @@
 		9F42056823663A0300D4414F /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056723663A0300D4414F /* DefaultCell.swift */; };
 		9F42056A23663CE400D4414F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056923663CE400D4414F /* Section.swift */; };
 		9F42056C23663F1E00D4414F /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056B23663F1E00D4414F /* WeatherCell.swift */; };
+		9F42056E236647A300D4414F /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056D236647A300D4414F /* WeatherViewController.swift */; };
+		9F420570236647B900D4414F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056F236647B900D4414F /* DetailViewController.swift */; };
+		9F42057223664BAD00D4414F /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42057123664BAD00D4414F /* PinAnnotation.swift */; };
 		9F702923236461B500770F64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F702922236461B500770F64 /* AppDelegate.swift */; };
 		9F702925236461B500770F64 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F702924236461B500770F64 /* SceneDelegate.swift */; };
-		9F702927236461B500770F64 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F702926236461B500770F64 /* ViewController.swift */; };
+		9F702927236461B500770F64 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F702926236461B500770F64 /* MapViewController.swift */; };
 		9F70292A236461B500770F64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F702928236461B500770F64 /* Main.storyboard */; };
 		9F70292D236461B500770F64 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9F70292B236461B500770F64 /* Model.xcdatamodeld */; };
 		9F70292F236461BA00770F64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F70292E236461BA00770F64 /* Assets.xcassets */; };
@@ -30,10 +33,13 @@
 		9F42056723663A0300D4414F /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
 		9F42056923663CE400D4414F /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		9F42056B23663F1E00D4414F /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
+		9F42056D236647A300D4414F /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		9F42056F236647B900D4414F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		9F42057123664BAD00D4414F /* PinAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
 		9F70291F236461B500770F64 /* WeatherLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F702922236461B500770F64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F702924236461B500770F64 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9F702926236461B500770F64 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9F702926236461B500770F64 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		9F702929236461B500770F64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9F70292C236461B500770F64 /* WeatherLogger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatherLogger.xcdatamodel; sourceTree = "<group>"; };
 		9F70292E236461BA00770F64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -84,7 +90,6 @@
 				9F7029392364634E00770F64 /* Networking */,
 				9F702922236461B500770F64 /* AppDelegate.swift */,
 				9F702924236461B500770F64 /* SceneDelegate.swift */,
-				9F702926236461B500770F64 /* ViewController.swift */,
 				9F702928236461B500770F64 /* Main.storyboard */,
 				9F70292E236461BA00770F64 /* Assets.xcassets */,
 				9F702930236461BA00770F64 /* LaunchScreen.storyboard */,
@@ -109,6 +114,9 @@
 		9F70293A2364636F00770F64 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9F702926236461B500770F64 /* MapViewController.swift */,
+				9F42056D236647A300D4414F /* WeatherViewController.swift */,
+				9F42056F236647B900D4414F /* DetailViewController.swift */,
 				9F42056723663A0300D4414F /* DefaultCell.swift */,
 				9F42056B23663F1E00D4414F /* WeatherCell.swift */,
 			);
@@ -121,6 +129,7 @@
 				9F70292B236461B500770F64 /* Model.xcdatamodeld */,
 				9F7029492364693E00770F64 /* Weather.swift */,
 				9F42056923663CE400D4414F /* Section.swift */,
+				9F42057123664BAD00D4414F /* PinAnnotation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -205,13 +214,16 @@
 			files = (
 				9F70293E236463FF00770F64 /* WeatherClient.swift in Sources */,
 				9F42056823663A0300D4414F /* DefaultCell.swift in Sources */,
-				9F702927236461B500770F64 /* ViewController.swift in Sources */,
+				9F702927236461B500770F64 /* MapViewController.swift in Sources */,
 				9F702923236461B500770F64 /* AppDelegate.swift in Sources */,
 				9F70294A2364693E00770F64 /* Weather.swift in Sources */,
 				9F7029422364641A00770F64 /* Rest.swift in Sources */,
 				9F42056C23663F1E00D4414F /* WeatherCell.swift in Sources */,
 				9F7029482364657800770F64 /* Results.swift in Sources */,
 				9F42056A23663CE400D4414F /* Section.swift in Sources */,
+				9F42056E236647A300D4414F /* WeatherViewController.swift in Sources */,
+				9F420570236647B900D4414F /* DetailViewController.swift in Sources */,
+				9F42057223664BAD00D4414F /* PinAnnotation.swift in Sources */,
 				9F7029462364643C00770F64 /* Response.swift in Sources */,
 				9F7029402364640F00770F64 /* RestManager.swift in Sources */,
 				9F70292D236461B500770F64 /* Model.xcdatamodeld in Sources */,

@@ -14,14 +14,27 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ecp-65-Jmf">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ecp-65-Jmf" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="5bd-GW-Y2I"/>
+                            <constraint firstItem="ecp-65-Jmf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Xq8-iN-zbl"/>
+                            <constraint firstItem="ecp-65-Jmf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nal-as-9qf"/>
+                            <constraint firstItem="ecp-65-Jmf" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="pWN-7n-Gxw"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="VU1-V9-kbq"/>
+                    <navigationItem key="navigationItem" id="VU1-V9-kbq">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="0YA-sB-pFj"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2017" y="-330"/>
+            <point key="canvasLocation" x="2015.9420289855075" y="-330.13392857142856"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="gMt-il-jGG">
@@ -59,6 +72,7 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="U6h-EM-H3C" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="v0C-Q0-G2m">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -78,6 +92,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bi8-1w-F3Z" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="bookmarks" id="KEw-9O-W93"/>
                     <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wcQ-mG-2e7">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
