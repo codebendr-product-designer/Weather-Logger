@@ -18,11 +18,9 @@ class ViewController: UIViewController {
     
     func loadPhotAlbum(coordinate: CLLocationCoordinate2D)  {
         
+        guard let restManager = EndPoint.forecast.get().restManager else { return }
         
-        let restManager = RestManager()
-        if let url = EndPoint.rest.get().url {
-            
-            let random = Int.random(in: 1...pages)
+        if let url = EndPoint.forecast.get().url {
             
             restManager.parameters.add(value: "\(coordinate.latitude)", forKey: "lat")
             restManager.parameters.add(value: "\(coordinate.longitude)", forKey: "lon")
@@ -47,34 +45,19 @@ class ViewController: UIViewController {
                         return
                     }
                     
-                    WeatherClient<FlickrStat>().decode(data: data) {
+                    WeatherClient<Weather>().decode(data: data) {
                         result in
                         
                         switch result {
                             
                         case .success(let response):
-                            if !response.photos.photo.isEmpty {
-                                self.setupPhotos(response.photos)
-                                self.pages = response.photos.pages
-                            } else {
-                                DispatchQueue.main.async {
-                                    let alert = Alert.show(type: .noPhotos, message: "Please try another location on the map") { _ in
-                                        self.navigationController?.popViewController(animated: true)
-                                    }
-                                    self.present(alert, animated: true)
-                                }
-                            }
+                           print(response)
                             
-                        case .failure(_):
-                            DispatchQueue.main.async {
-                                self.present(Alert.show(type: .server), animated: true)
-                            }
+                        case .failure(let error):
+                            print(error)
                             
-                        case .flickrError(let flickrError):
-                            DispatchQueue.main.async {
-                                let alert = Alert.show(type: .photosError, message: flickrError.message)
-                                self.present(alert, animated: true, completion: nil)
-                            }
+                        case .weatherError(let weatherError):
+                            print(weatherError)
                             
                         }
                         
@@ -82,7 +65,7 @@ class ViewController: UIViewController {
                     
                 } else {
                     DispatchQueue.main.async {
-                        self.present(Alert.show(type: .general), animated: true)
+                       print("general error")
                     }
                 }
             }

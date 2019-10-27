@@ -28,6 +28,6 @@ struct Results {
 enum Result<T, U: Error> {
     case success(T)
     case failure(U)
-    case flickrError(WeatherError)
+    case weatherError(WeatherError)
 }
 
