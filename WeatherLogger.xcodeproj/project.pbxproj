@@ -13,6 +13,10 @@
 		9F42056E236647A300D4414F /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056D236647A300D4414F /* WeatherViewController.swift */; };
 		9F420570236647B900D4414F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056F236647B900D4414F /* DetailViewController.swift */; };
 		9F42057223664BAD00D4414F /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42057123664BAD00D4414F /* PinAnnotation.swift */; };
+		9F42057423664C1800D4414F /* UIStoryboard+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42057323664C1800D4414F /* UIStoryboard+extension.swift */; };
+		9F42057623664C4800D4414F /* UIImageView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42057523664C4800D4414F /* UIImageView+extension.swift */; };
+		9F42057A23664C8300D4414F /* Pin+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42057923664C8300D4414F /* Pin+extension.swift */; };
+		9F42057C23664D2700D4414F /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42057B23664D2700D4414F /* DataStore.swift */; };
 		9F702923236461B500770F64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F702922236461B500770F64 /* AppDelegate.swift */; };
 		9F702925236461B500770F64 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F702924236461B500770F64 /* SceneDelegate.swift */; };
 		9F702927236461B500770F64 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F702926236461B500770F64 /* MapViewController.swift */; };
@@ -36,6 +40,10 @@
 		9F42056D236647A300D4414F /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		9F42056F236647B900D4414F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9F42057123664BAD00D4414F /* PinAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
+		9F42057323664C1800D4414F /* UIStoryboard+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+extension.swift"; sourceTree = "<group>"; };
+		9F42057523664C4800D4414F /* UIImageView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+extension.swift"; sourceTree = "<group>"; };
+		9F42057923664C8300D4414F /* Pin+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pin+extension.swift"; sourceTree = "<group>"; };
+		9F42057B23664D2700D4414F /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		9F70291F236461B500770F64 /* WeatherLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F702922236461B500770F64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F702924236461B500770F64 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +73,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F42057723664C5800D4414F /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9F42057323664C1800D4414F /* UIStoryboard+extension.swift */,
+				9F42057523664C4800D4414F /* UIImageView+extension.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
+		9F42057823664C6900D4414F /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				9F42057923664C8300D4414F /* Pin+extension.swift */,
+			);
+			path = extension;
+			sourceTree = "<group>";
+		};
 		9F702916236461B400770F64 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +139,7 @@
 		9F70293A2364636F00770F64 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9F42057723664C5800D4414F /* extensions */,
 				9F702926236461B500770F64 /* MapViewController.swift */,
 				9F42056D236647A300D4414F /* WeatherViewController.swift */,
 				9F42056F236647B900D4414F /* DetailViewController.swift */,
@@ -126,10 +152,12 @@
 		9F70293B236463A300770F64 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9F42057823664C6900D4414F /* extension */,
 				9F70292B236461B500770F64 /* Model.xcdatamodeld */,
 				9F7029492364693E00770F64 /* Weather.swift */,
 				9F42056923663CE400D4414F /* Section.swift */,
 				9F42057123664BAD00D4414F /* PinAnnotation.swift */,
+				9F42057B23664D2700D4414F /* DataStore.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -212,10 +240,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F42057423664C1800D4414F /* UIStoryboard+extension.swift in Sources */,
 				9F70293E236463FF00770F64 /* WeatherClient.swift in Sources */,
 				9F42056823663A0300D4414F /* DefaultCell.swift in Sources */,
+				9F42057623664C4800D4414F /* UIImageView+extension.swift in Sources */,
 				9F702927236461B500770F64 /* MapViewController.swift in Sources */,
+				9F42057A23664C8300D4414F /* Pin+extension.swift in Sources */,
 				9F702923236461B500770F64 /* AppDelegate.swift in Sources */,
+				9F42057C23664D2700D4414F /* DataStore.swift in Sources */,
 				9F70294A2364693E00770F64 /* Weather.swift in Sources */,
 				9F7029422364641A00770F64 /* Rest.swift in Sources */,
 				9F42056C23663F1E00D4414F /* WeatherCell.swift in Sources */,
