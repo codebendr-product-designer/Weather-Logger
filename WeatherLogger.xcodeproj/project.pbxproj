@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F42056823663A0300D4414F /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056723663A0300D4414F /* DefaultCell.swift */; };
+		9F42056A23663CE400D4414F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056923663CE400D4414F /* Section.swift */; };
 		9F702923236461B500770F64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F702922236461B500770F64 /* AppDelegate.swift */; };
 		9F702925236461B500770F64 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F702924236461B500770F64 /* SceneDelegate.swift */; };
 		9F702927236461B500770F64 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F702926236461B500770F64 /* ViewController.swift */; };
 		9F70292A236461B500770F64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F702928236461B500770F64 /* Main.storyboard */; };
-		9F70292D236461B500770F64 /* WeatherLogger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9F70292B236461B500770F64 /* WeatherLogger.xcdatamodeld */; };
+		9F70292D236461B500770F64 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9F70292B236461B500770F64 /* Model.xcdatamodeld */; };
 		9F70292F236461BA00770F64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F70292E236461BA00770F64 /* Assets.xcassets */; };
 		9F702932236461BA00770F64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F702930236461BA00770F64 /* LaunchScreen.storyboard */; };
 		9F70293E236463FF00770F64 /* WeatherClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F70293D236463FF00770F64 /* WeatherClient.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F42056723663A0300D4414F /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
+		9F42056923663CE400D4414F /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		9F70291F236461B500770F64 /* WeatherLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F702922236461B500770F64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F702924236461B500770F64 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,7 +87,6 @@
 				9F70292E236461BA00770F64 /* Assets.xcassets */,
 				9F702930236461BA00770F64 /* LaunchScreen.storyboard */,
 				9F702933236461BA00770F64 /* Info.plist */,
-				9F70292B236461B500770F64 /* WeatherLogger.xcdatamodeld */,
 			);
 			path = WeatherLogger;
 			sourceTree = "<group>";
@@ -104,6 +107,7 @@
 		9F70293A2364636F00770F64 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9F42056723663A0300D4414F /* DefaultCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -111,7 +115,9 @@
 		9F70293B236463A300770F64 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9F70292B236461B500770F64 /* Model.xcdatamodeld */,
 				9F7029492364693E00770F64 /* Weather.swift */,
+				9F42056923663CE400D4414F /* Section.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -195,14 +201,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F70293E236463FF00770F64 /* WeatherClient.swift in Sources */,
+				9F42056823663A0300D4414F /* DefaultCell.swift in Sources */,
 				9F702927236461B500770F64 /* ViewController.swift in Sources */,
 				9F702923236461B500770F64 /* AppDelegate.swift in Sources */,
 				9F70294A2364693E00770F64 /* Weather.swift in Sources */,
 				9F7029422364641A00770F64 /* Rest.swift in Sources */,
 				9F7029482364657800770F64 /* Results.swift in Sources */,
+				9F42056A23663CE400D4414F /* Section.swift in Sources */,
 				9F7029462364643C00770F64 /* Response.swift in Sources */,
 				9F7029402364640F00770F64 /* RestManager.swift in Sources */,
-				9F70292D236461B500770F64 /* WeatherLogger.xcdatamodeld in Sources */,
+				9F70292D236461B500770F64 /* Model.xcdatamodeld in Sources */,
 				9F702925236461B500770F64 /* SceneDelegate.swift in Sources */,
 				9F7029442364642900770F64 /* WeatherError.swift in Sources */,
 			);
@@ -404,13 +412,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		9F70292B236461B500770F64 /* WeatherLogger.xcdatamodeld */ = {
+		9F70292B236461B500770F64 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				9F70292C236461B500770F64 /* WeatherLogger.xcdatamodel */,
 			);
 			currentVersion = 9F70292C236461B500770F64 /* WeatherLogger.xcdatamodel */;
-			path = WeatherLogger.xcdatamodeld;
+			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
