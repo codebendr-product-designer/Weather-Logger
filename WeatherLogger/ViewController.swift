@@ -13,10 +13,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+          
+        loadForecast(coordinate: CLLocationCoordinate2D(latitude: 35, longitude: -139))
     }
     
-    func loadPhotAlbum(coordinate: CLLocationCoordinate2D)  {
+    func loadForecast(coordinate: CLLocationCoordinate2D)  {
         
         guard let restManager = EndPoint.forecast.get().restManager else { return }
         
@@ -25,7 +26,6 @@ class ViewController: UIViewController {
             restManager.parameters.add(value: "\(coordinate.latitude)", forKey: "lat")
             restManager.parameters.add(value: "\(coordinate.longitude)", forKey: "lon")
 
-            
             DispatchQueue.main.async {
             }
             

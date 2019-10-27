@@ -13,7 +13,7 @@ struct Weather: Codable {
     let cod: String
     let message, cnt: Int
     let list: [List]
-    let city: City
+  //  let city: City?
 }
 
 // MARK: - City
@@ -40,7 +40,7 @@ struct List: Codable {
     let sys: Sys
     let dtTxt: String
     let rain: Rain?
-
+    
     enum CodingKeys: String, CodingKey {
         case dt, main, weather, clouds, wind, sys
         case dtTxt = "dt_txt"
@@ -53,12 +53,12 @@ struct Clouds: Codable {
     let all: Int
 }
 
-// MARK: - Main
+// MARK: - MainClass
 struct Main: Codable {
     let temp, tempMin, tempMax: Double
     let pressure, seaLevel, grndLevel, humidity: Int
     let tempKf: Double
-
+    
     enum CodingKeys: String, CodingKey {
         case temp
         case tempMin = "temp_min"
@@ -74,7 +74,7 @@ struct Main: Codable {
 // MARK: - Rain
 struct Rain: Codable {
     let the3H: Double
-
+    
     enum CodingKeys: String, CodingKey {
         case the3H = "3h"
     }
@@ -93,13 +93,13 @@ enum Pod: String, Codable {
 // MARK: - WeatherElement
 struct WeatherElement: Codable {
     let id: Int
-    let main: WeatherCondition
-    let weatherDescription: Description
+   // let main: MainEnum
+   // let description: Description
     let icon: Icon
-
+    
     enum CodingKeys: String, CodingKey {
-        case id, main
-        case weatherDescription = "description"
+        case id //, main
+     //   case description = "description"
         case icon
     }
 }
@@ -111,7 +111,7 @@ enum Icon: String, Codable {
     case the10N = "10n"
 }
 
-enum WeatherCondition: String, Codable {
+enum MainEnum: String, Codable {
     case clouds = "Clouds"
     case rain = "Rain"
 }

@@ -17,7 +17,7 @@ enum EndPoint: String {
         
         //defualt methods for API
         restManager.parameters.add(value: "b6907d289e10d714a6e88b30761fae22", forKey: "appid")
-        restManager.parameters.add(value: "apiKey", forKey: "format")
+        restManager.parameters.add(value: "b5356aff41df4453fbb4cd26d2e817fc", forKey: "apiKey")
         
         let url = URL(string: "https://api.openweathermap.org/data/2.5/\(self.rawValue)/")
         return (url, restManager)
