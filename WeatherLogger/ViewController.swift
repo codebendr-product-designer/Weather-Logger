@@ -14,17 +14,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
           
-        loadForecast(coordinate: CLLocationCoordinate2D(latitude: 35, longitude: -139))
+        loadWeather(coordinate: CLLocationCoordinate2D(latitude: 35, longitude: -139))
     }
     
-    func loadForecast(coordinate: CLLocationCoordinate2D)  {
+    func loadWeather(coordinate: CLLocationCoordinate2D)  {
         
-        guard let restManager = EndPoint.forecast.get().restManager else { return }
+        guard let restManager = EndPoint.weather.get().restManager else { return }
         
-        if let url = EndPoint.forecast.get().url {
+        if let url = EndPoint.weather.get().url {
             
-            restManager.parameters.add(value: "\(coordinate.latitude)", forKey: "lat")
+           restManager.parameters.add(value: "\(coordinate.latitude)", forKey: "lat")
             restManager.parameters.add(value: "\(coordinate.longitude)", forKey: "lon")
+          //  restManager.parameters.add(value: "accra", forKey: "q")
 
             DispatchQueue.main.async {
             }

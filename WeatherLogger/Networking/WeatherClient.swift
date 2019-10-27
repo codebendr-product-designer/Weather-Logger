@@ -10,7 +10,7 @@
 import Foundation
 
 enum EndPoint: String {
-    case forecast
+    case weather
     func get() -> (url:URL?, restManager: RestManager?) {
         
         let restManager = RestManager()
