@@ -7,15 +7,19 @@
 //
 
 import UIKit
-import MapKit
+import CoreLocation
 
 class WeatherViewController: UIViewController {
 
+    @IBOutlet weak var stackView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
          
     }
 
-
+    @IBAction func enableLocationButtonPressed(_ sender: Any) {
+    }
+    
 }
 

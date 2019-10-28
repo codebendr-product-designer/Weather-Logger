@@ -8,7 +8,6 @@
 
 import Foundation
 
-struct Section<U: Hashable, T: Hashable>: Hashable {
-    let title: U
-    let items: T
+enum Section: CaseIterable {
+    case main
 }

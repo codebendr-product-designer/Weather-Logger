@@ -33,7 +33,7 @@ class MapViewController: UIViewController {
 extension MapViewController {
     
     func setupMap() {
-        let initialLocation: CLLocation = CLLocation(latitude: 37.322997999999998, longitude: -122.03218200000001)
+        let initialLocation: CLLocation = CLLocation(latitude: 37, longitude: -122)
         let coordinateRegion = MKCoordinateRegion(center: initialLocation.coordinate,
                                                   latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)

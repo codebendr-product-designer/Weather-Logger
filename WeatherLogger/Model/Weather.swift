@@ -9,11 +9,19 @@
 import Foundation
 
 // MARK: - Weather
-struct Weather: Codable {
-    let id: Int?
+struct Weather: Codable, Hashable {
+    
+    let id = UUID()
     let coord: Coord
     let weather: [WeatherElement]
     let main: Main
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    static func == (lhs: Weather, rhs: Weather) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
 // MARK: - Coord
