@@ -32,6 +32,7 @@
 		9F7029462364643C00770F64 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7029452364643C00770F64 /* Response.swift */; };
 		9F7029482364657800770F64 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7029472364657800770F64 /* Results.swift */; };
 		9F70294A2364693E00770F64 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7029492364693E00770F64 /* Weather.swift */; };
+		9F90C8D323677D9D00C995FE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F90C8D223677D9D00C995FE /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		9F7029452364643C00770F64 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		9F7029472364657800770F64 /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 		9F7029492364693E00770F64 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		9F90C8D223677D9D00C995FE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 				9F42057D23664DD300D4414F /* extension */,
 				9F702926236461B500770F64 /* MapViewController.swift */,
 				9F42056D236647A300D4414F /* WeatherViewController.swift */,
+				9F90C8D223677D9D00C995FE /* MainViewController.swift */,
 				9F42056F236647B900D4414F /* DetailViewController.swift */,
 			);
 			path = Controller;
@@ -258,6 +261,7 @@
 				9F42057623664C4800D4414F /* UIImageView+extension.swift in Sources */,
 				9F702927236461B500770F64 /* MapViewController.swift in Sources */,
 				9F42057A23664C8300D4414F /* Pin+extension.swift in Sources */,
+				9F90C8D323677D9D00C995FE /* MainViewController.swift in Sources */,
 				9F702923236461B500770F64 /* AppDelegate.swift in Sources */,
 				9F42057C23664D2700D4414F /* DataStore.swift in Sources */,
 				9F70294A2364693E00770F64 /* Weather.swift in Sources */,
