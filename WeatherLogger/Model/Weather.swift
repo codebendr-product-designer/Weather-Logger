@@ -11,7 +11,7 @@ import Foundation
 // MARK: - Weather
 struct Weather: Codable, Hashable {
     
-    let id = UUID()
+    let id = UUID().uuidString
     let coord: Coord
     let weather: [WeatherElement]
     let main: Main

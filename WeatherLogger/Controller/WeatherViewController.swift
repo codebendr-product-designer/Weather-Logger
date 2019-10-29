@@ -17,17 +17,44 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var txtCity: UILabel!
     @IBOutlet weak var txtWeatherDescription: UILabel!
     @IBOutlet weak var txtTemperature: UILabel!
+    @IBOutlet weak var txtHumidity: UILabel!
+    @IBOutlet weak var btnAction: UIButton!
     
     let degreesSign = "°"
     var annotation: PinAnnotation!
     var dataStore: DataStore!
+    var currentWeather: CurrentWeather!
+    var pin: Pin!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadWeather(coordinate: CLLocationCoordinate2D(latitude: 35, longitude: -139))
+        
+        pin = Pin(context: dataStore.viewContext)
+        pin.latitude = annotation.coordinate.latitude
+        pin.longitude = annotation.coordinate.longitude
+        
+        currentWeather = CurrentWeather(context: dataStore.viewContext)
+        currentWeather.pinID = pin.id
+        
     }
     
+    @IBAction func btnActionPressed(_ sender: Any) {
+        do {
+            try dataStore.viewContext.save()
+            //load previous uinavigation view controller
+            self.navigationController?.popViewController(animated: true)
+        } catch {
+            DispatchQueue.main.async {
+                //error saving current weather
+            }
+        }
+    }
+    
+}
+
+extension WeatherViewController {
     
     func loadWeather(coordinate: CLLocationCoordinate2D)  {
         
@@ -65,8 +92,9 @@ class WeatherViewController: UIViewController {
                         switch result {
                             
                         case .success(let response):
+                            self.currentWeather.prepare(toSave: response)
                             DispatchQueue.main.async {
-                            self.configure(with: response)
+                                self.configure(with: response)
                             }
                             
                         case .failure(let error):
@@ -87,30 +115,34 @@ class WeatherViewController: UIViewController {
             }
         }
     }
-    
 }
 
 extension WeatherViewController {
+    
     func configureUI(_ isLoading: Bool) {
         loaderView.isHidden = !isLoading
     }
+    
     func configure(with response: Weather){
         let weather = response.weather[0]
         let main = response.main
-        imageView.dow
+        imageView.download(from: WeatherURL.get(weather.icon)) {
+            data in
+            guard let data = data else {return}
+            self.currentWeather.icon = data.jpegData(compressionQuality: 1)
+        }
         txtCity.text = weather.main
         txtWeatherDescription.text = weather.desc
         let celsius =  String(format:"%g",main.temp.celsius())
         txtTemperature.text = "\(celsius)\(degreesSign)"
+        txtHumidity.text = "HUMIDITY \(main.humidity)%"
     }
+    
+    
     
 }
 
-extension Double {
-    func celsius() -> Double {
-        return (self - 273.15).rounded()
-    }
-}
+
 
 
 

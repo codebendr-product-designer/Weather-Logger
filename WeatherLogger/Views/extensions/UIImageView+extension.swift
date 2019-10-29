@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIImageView {
-    func download(url: String, completed: @escaping (UIImage?) -> Void) {
+    func download(from url: String, completed: @escaping (UIImage?) -> Void = { _ in return }) {
         guard let url = URL(string: url) else { return }
         URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
             guard let data = data, let image = UIImage(data: data) else {
