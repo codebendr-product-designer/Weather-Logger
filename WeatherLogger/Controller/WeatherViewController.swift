@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Foundation
 
 class WeatherViewController: UIViewController {
     
@@ -39,6 +40,7 @@ class WeatherViewController: UIViewController {
             //  restManager.parameters.add(value: "accra", forKey: "q")
             
             DispatchQueue.main.async {
+                self.configureUI(true)
             }
             
             restManager.request(url: url, with: .get) {
@@ -47,7 +49,7 @@ class WeatherViewController: UIViewController {
                 if results.error == nil {
                     
                     DispatchQueue.main.async {
-                        
+                        self.configureUI(false)
                     }
                     
                     guard let data = results.data else {
@@ -63,7 +65,9 @@ class WeatherViewController: UIViewController {
                         switch result {
                             
                         case .success(let response):
-                            print(response)
+                            DispatchQueue.main.async {
+                            self.configure(with: response)
+                            }
                             
                         case .failure(let error):
                             print(error)
@@ -89,6 +93,22 @@ class WeatherViewController: UIViewController {
 extension WeatherViewController {
     func configureUI(_ isLoading: Bool) {
         loaderView.isHidden = !isLoading
+    }
+    func configure(with response: Weather){
+        let weather = response.weather[0]
+        let main = response.main
+        imageView.dow
+        txtCity.text = weather.main
+        txtWeatherDescription.text = weather.desc
+        let celsius =  String(format:"%g",main.temp.celsius())
+        txtTemperature.text = "\(celsius)\(degreesSign)"
+    }
+    
+}
+
+extension Double {
+    func celsius() -> Double {
+        return (self - 273.15).rounded()
     }
 }
 

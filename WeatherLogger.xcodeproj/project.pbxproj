@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F272A4C23682E2D003AC3E5 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F272A4B23682E2D003AC3E5 /* Forecast.swift */; };
 		9F42056823663A0300D4414F /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056723663A0300D4414F /* DefaultCell.swift */; };
 		9F42056A23663CE400D4414F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056923663CE400D4414F /* Section.swift */; };
 		9F42056C23663F1E00D4414F /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056B23663F1E00D4414F /* WeatherCell.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F272A4B23682E2D003AC3E5 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		9F42056723663A0300D4414F /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
 		9F42056923663CE400D4414F /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		9F42056B23663F1E00D4414F /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				9F42057823664C6900D4414F /* extension */,
 				9F70292B236461B500770F64 /* Model.xcdatamodeld */,
 				9F7029492364693E00770F64 /* Weather.swift */,
+				9F272A4B23682E2D003AC3E5 /* Forecast.swift */,
 				9F42056923663CE400D4414F /* Section.swift */,
 				9F42057123664BAD00D4414F /* PinAnnotation.swift */,
 				9F42057B23664D2700D4414F /* DataStore.swift */,
@@ -270,6 +273,7 @@
 				9F7029482364657800770F64 /* Results.swift in Sources */,
 				9F42056A23663CE400D4414F /* Section.swift in Sources */,
 				9F42056E236647A300D4414F /* WeatherViewController.swift in Sources */,
+				9F272A4C23682E2D003AC3E5 /* Forecast.swift in Sources */,
 				9F420570236647B900D4414F /* DetailViewController.swift in Sources */,
 				9F42057223664BAD00D4414F /* PinAnnotation.swift in Sources */,
 				9F7029462364643C00770F64 /* Response.swift in Sources */,

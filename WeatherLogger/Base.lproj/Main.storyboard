@@ -133,10 +133,10 @@ around you.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Syh-N0-tPO">
-                                <rect key="frame" x="45.5" y="78" width="323" height="243"/>
+                                <rect key="frame" x="45.5" y="323" width="323" height="250"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TST-Hc-Bci">
-                                        <rect key="frame" x="0.0" y="0.0" width="323" height="187"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="323" height="184"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="77" translatesAutoresizingMaskIntoConstraints="NO" id="3XW-9S-zRL">
                                                 <rect key="frame" x="16" y="25" width="291" height="121"/>
@@ -189,10 +189,11 @@ around you.</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lC8-sT-dJx">
-                                        <rect key="frame" x="81.5" y="203" width="160" height="40"/>
+                                        <rect key="frame" x="81.5" y="200" width="160" height="50"/>
                                         <color key="backgroundColor" red="0.27475890520000001" green="0.62150126699999997" blue="0.3921135664" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="EVn-lR-QNo"/>
+                                            <constraint firstAttribute="height" constant="50" id="OmY-ir-lWE"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Save">
@@ -208,8 +209,13 @@ around you.</string>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="0IC-OM-KgP"/>
+                                    <constraint firstAttribute="width" constant="323" id="HRE-pe-n9J"/>
+                                    <constraint firstItem="TST-Hc-Bci" firstAttribute="leading" secondItem="Syh-N0-tPO" secondAttribute="leadingMargin" id="xSw-Vu-62k"/>
+                                </constraints>
                             </stackView>
-                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ix6-hC-7Zc">
+                            <view hidden="YES" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ix6-hC-7Zc">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="TTi-e5-ZNJ">
@@ -227,11 +233,10 @@ around you.</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Ix6-hC-7Zc" firstAttribute="leading" secondItem="RW4-wi-5BT" secondAttribute="leading" id="8sP-YB-Ita"/>
-                            <constraint firstItem="Syh-N0-tPO" firstAttribute="top" secondItem="RW4-wi-5BT" secondAttribute="top" constant="34" id="BBX-rR-Clq"/>
-                            <constraint firstItem="Syh-N0-tPO" firstAttribute="leading" secondItem="RW4-wi-5BT" secondAttribute="leading" constant="45.5" id="O7m-QB-BSq"/>
-                            <constraint firstItem="RW4-wi-5BT" firstAttribute="bottom" secondItem="Syh-N0-tPO" secondAttribute="bottom" constant="541" id="bgr-RL-Oz5"/>
+                            <constraint firstItem="Syh-N0-tPO" firstAttribute="centerX" secondItem="tEL-va-YnN" secondAttribute="centerX" id="Czk-eh-BcO"/>
                             <constraint firstItem="Ix6-hC-7Zc" firstAttribute="top" secondItem="RW4-wi-5BT" secondAttribute="top" id="hOA-Gp-sc3"/>
                             <constraint firstItem="Syh-N0-tPO" firstAttribute="centerX" secondItem="tEL-va-YnN" secondAttribute="centerX" id="oWe-9u-ZCO"/>
+                            <constraint firstItem="Syh-N0-tPO" firstAttribute="centerY" secondItem="tEL-va-YnN" secondAttribute="centerY" id="qGf-WR-ns4"/>
                             <constraint firstItem="Ix6-hC-7Zc" firstAttribute="bottom" secondItem="RW4-wi-5BT" secondAttribute="bottom" id="rPR-iP-ZE2"/>
                             <constraint firstItem="RW4-wi-5BT" firstAttribute="trailing" secondItem="Ix6-hC-7Zc" secondAttribute="trailing" id="vJw-rz-cPk"/>
                         </constraints>
@@ -247,7 +252,7 @@ around you.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l5a-tX-lnv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="699" y="51"/>
+            <point key="canvasLocation" x="698.55072463768124" y="50.892857142857139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7ib-YC-aHr">

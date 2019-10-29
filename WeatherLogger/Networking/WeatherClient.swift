@@ -5,13 +5,12 @@
 //  Created by codebendr on 26/10/2019.
 //  Copyright © 2019 just pixel. All rights reserved.
 //
-//b5356aff41df4453fbb4cd26d2e817fc
-//icon link - https://openweathermap.org/img/w/10n.png
 import Foundation
 import MapKit
 
 enum EndPoint: String {
     case weather
+    case forecast
     func get() -> (url:URL?, restManager: RestManager?) {
         
         let restManager = RestManager()
