@@ -135,11 +135,11 @@ around you.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TST-Hc-Bci">
                                 <rect key="frame" x="16" y="64" width="382" height="222"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="148" translatesAutoresizingMaskIntoConstraints="NO" id="3XW-9S-zRL">
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="70" translatesAutoresizingMaskIntoConstraints="NO" id="3XW-9S-zRL">
                                         <rect key="frame" x="16" y="16" width="350" height="165"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PQH-SX-KAb">
-                                                <rect key="frame" x="0.0" y="0.0" width="124" height="165"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="220" height="165"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOs-f5-Hnd">
                                                         <rect key="frame" x="0.0" y="0.0" width="11.5" height="20.5"/>
@@ -167,8 +167,8 @@ around you.</string>
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I6e-Xf-d4g">
-                                                <rect key="frame" x="272" y="51.5" width="78" height="62"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I6e-Xf-d4g">
+                                                <rect key="frame" x="290" y="52.5" width="60" height="60"/>
                                             </imageView>
                                         </subviews>
                                     </stackView>

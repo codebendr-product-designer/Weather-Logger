@@ -32,23 +32,36 @@ class WeatherViewController: UIViewController {
         loadWeather(coordinate: CLLocationCoordinate2D(latitude: 35, longitude: -139))
         
         pin = Pin(context: dataStore.viewContext)
+        pin.id = annotation.id
         pin.latitude = annotation.coordinate.latitude
         pin.longitude = annotation.coordinate.longitude
         
         currentWeather = CurrentWeather(context: dataStore.viewContext)
+        currentWeather.id = UUID().uuidString
+        currentWeather.createdAt = Date()
         currentWeather.pinID = pin.id
+        currentWeather.city = annotation.title
+        
+        currentWeather.fetch { weather in
+            guard let weather = weather else { return }
+            
+            print("stored weather values \(weather.count)")
+        }
+        
+        
         
     }
     
     @IBAction func btnActionPressed(_ sender: Any) {
-        do {
-            try dataStore.viewContext.save()
-            self.navigationController?.popViewController(animated: true)
-        } catch {
-            DispatchQueue.main.async {
-                self.present(Alert.show(.saveError),animated:true)
-            }
-        }
+        print("current weather \(String(describing: currentWeather)))")
+//        do {
+//            try dataStore.viewContext.save()
+//            self.navigationController?.popViewController(animated: true)
+//        } catch {
+//            DispatchQueue.main.async {
+//                self.present(Alert.show(.saveError),animated:true)
+//            }
+//        }
     }
     
 }
@@ -130,7 +143,7 @@ extension WeatherViewController {
             guard let data = data else {return}
             self.currentWeather.icon = data.jpegData(compressionQuality: 1)
         }
-        txtCity.text = weather.main
+        txtCity.text = annotation.title
         txtWeatherDescription.text = weather.desc
         let celsius =  String(format:"%g",main.temp.celsius())
         txtTemperature.text = "\(celsius)\(degreesSign)"

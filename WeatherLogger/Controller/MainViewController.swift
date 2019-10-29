@@ -14,19 +14,42 @@ class MainViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     let locationManager = CLLocationManager()
     var dataStore: DataStore!
+    var isLocation = false
+    let locationStatus = CLLocationManager.authorizationStatus()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         locationManager.delegate = self
         
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                stackView.isHidden = false
+            case .authorizedAlways, .authorizedWhenInUse:
+                stackView.isHidden = true
+            default :
+                return
+            }
+        }
+    }
+    
+    func find(location: CLLocation, placemark: @escaping (CLPlacemark?) -> Void) {
+        let geocode = CLGeocoder()
+        geocode.reverseGeocodeLocation(location) { (placemarks, error) in
+            if error == nil {
+                if let placemarks = placemarks {
+                    placemark(placemarks[0])
+                }
+            }
+        }
     }
     
     @IBAction func enableLocationButtonPressed(_ sender: Any) {
         
-        let status = CLLocationManager.authorizationStatus()
         
-        switch status {
+        
+        switch locationStatus {
             
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
@@ -56,16 +79,36 @@ extension MainViewController: CLLocationManagerDelegate {
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let currentLocation = locations.last {
+        
+        if !isLocation {
             
-            let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
+            isLocation = true
             
-            weatherViewController.annotation = PinAnnotation(coordinate: currentLocation.coordinate)
-            weatherViewController.dataStore = dataStore
-            
-            self.navigationController?.pushViewController(weatherViewController, animated: true)
-
-            locationManager.stopUpdatingLocation()
+            if let currentLocation = locations.last {
+                
+                let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
+                
+                let annotation = PinAnnotation(coordinate: currentLocation.coordinate)
+                
+                let lon = currentLocation.coordinate.longitude
+                let lat = currentLocation.coordinate.latitude
+                find(location: CLLocation(latitude: lat, longitude: lon)) {
+                    placemark in
+                    if let placemark = placemark {
+                        annotation.title = placemark.locality
+                    }
+                    
+                    weatherViewController.annotation = annotation
+                    weatherViewController.dataStore = self.dataStore
+                    
+                    DispatchQueue.main.async {
+                        self.navigationController?.pushViewController(weatherViewController, animated: true)
+                    }
+                    
+                }
+                
+                locationManager.stopUpdatingLocation()
+            }
         }
     }
     
