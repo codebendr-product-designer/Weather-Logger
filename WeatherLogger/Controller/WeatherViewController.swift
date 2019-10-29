@@ -42,26 +42,18 @@ class WeatherViewController: UIViewController {
         currentWeather.pinID = pin.id
         currentWeather.city = annotation.title
         
-        currentWeather.fetch { weather in
-            guard let weather = weather else { return }
-            
-            print("stored weather values \(weather.count)")
-        }
-        
-        
-        
     }
     
     @IBAction func btnActionPressed(_ sender: Any) {
         print("current weather \(String(describing: currentWeather)))")
-//        do {
-//            try dataStore.viewContext.save()
-//            self.navigationController?.popViewController(animated: true)
-//        } catch {
-//            DispatchQueue.main.async {
-//                self.present(Alert.show(.saveError),animated:true)
-//            }
-//        }
+        do {
+            try dataStore.viewContext.save()
+            self.navigationController?.popViewController(animated: true)
+        } catch {
+            DispatchQueue.main.async {
+                self.present(Alert.show(.saveError),animated:true)
+            }
+        }
     }
     
 }

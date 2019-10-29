@@ -16,9 +16,18 @@ class MainViewController: UIViewController {
     var dataStore: DataStore!
     var isLocation = false
     let locationStatus = CLLocationManager.authorizationStatus()
+    var currentWeather: CurrentWeather!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        currentWeather = CurrentWeather(context: dataStore.viewContext)
+        
+        currentWeather.fetch {
+            weatherList in
+            guard let weatherList = weatherList else { return }
+            
+        }
         
         locationManager.delegate = self
         
@@ -46,9 +55,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func enableLocationButtonPressed(_ sender: Any) {
-        
-        
-        
+  
         switch locationStatus {
             
         case .notDetermined:

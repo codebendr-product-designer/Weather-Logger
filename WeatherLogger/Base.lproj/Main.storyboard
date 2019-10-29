@@ -100,11 +100,29 @@ around you.</string>
                                     </button>
                                 </subviews>
                             </stackView>
+                            <view hidden="YES" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pEK-8A-UUj">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Jd9-VN-HxF">
+                                        <rect key="frame" x="188.5" y="412.5" width="37" height="37"/>
+                                        <color key="color" red="0.33444869519999998" green="0.68160682920000004" blue="0.73334199190000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="Jd9-VN-HxF" firstAttribute="centerY" secondItem="pEK-8A-UUj" secondAttribute="centerY" id="OsF-gD-t2c"/>
+                                    <constraint firstItem="Jd9-VN-HxF" firstAttribute="centerX" secondItem="pEK-8A-UUj" secondAttribute="centerX" id="ram-dd-ILq"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="LAt-qJ-pMK" firstAttribute="centerY" secondItem="uph-zS-cJA" secondAttribute="centerY" id="HEg-JL-8dG"/>
                             <constraint firstItem="LAt-qJ-pMK" firstAttribute="centerX" secondItem="uph-zS-cJA" secondAttribute="centerX" id="MIt-T5-QHa"/>
+                            <constraint firstItem="pEK-8A-UUj" firstAttribute="leading" secondItem="iyg-aj-60O" secondAttribute="leading" id="Nqa-AZ-2DT"/>
+                            <constraint firstItem="pEK-8A-UUj" firstAttribute="top" secondItem="uph-zS-cJA" secondAttribute="top" id="P2h-qG-f3u"/>
+                            <constraint firstItem="pEK-8A-UUj" firstAttribute="trailing" secondItem="iyg-aj-60O" secondAttribute="trailing" id="Ta4-0J-5ZS"/>
+                            <constraint firstItem="iyg-aj-60O" firstAttribute="bottom" secondItem="pEK-8A-UUj" secondAttribute="bottom" id="V1g-9N-teO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iyg-aj-60O"/>
                     </view>
