@@ -7,10 +7,11 @@
 //
 
 import MapKit
+import Foundation
 
 class PinAnnotation : NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
-    var id: String?
+    var id = UUID().uuidString
     var title: String?
     init(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
