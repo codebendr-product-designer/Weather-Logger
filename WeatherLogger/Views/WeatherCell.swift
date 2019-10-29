@@ -9,6 +9,7 @@
 import UIKit
 
 class WeatherCell: UICollectionViewCell, DefaultCell {
+
     static var reuseIdentifier: String = "WeatherCell"
     
     let temperature = UILabel()
@@ -16,9 +17,15 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
     let subtitle = UILabel()
     let temperatureView = UIView()
     
-    func configure(with weather: Weather) {
+    override init(frame: CGRect) {
+         super.init(frame: frame)
+        
+        
         
     }
-    
+  
+    func configure(with model: CurrentWeather) {
+         
+     }
 
 }

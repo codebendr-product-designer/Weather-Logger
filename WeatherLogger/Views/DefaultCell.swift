@@ -10,5 +10,5 @@ import Foundation
 
 protocol DefaultCell {
     static var reuseIdentifier: String { get }
-    func configure(with weather: Weather)
+    func configure(with model: CurrentWeather)
 }
