@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WeatherLogger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="WeatherLogger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,12 +29,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="VU1-V9-kbq">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="0YA-sB-pFj"/>
+                        <barButtonItem key="rightBarButtonItem" title="Use Location" id="AIG-6N-xcP"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2894" y="-276"/>
+            <point key="canvasLocation" x="1561" y="-635"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="gMt-il-jGG">
@@ -108,8 +108,14 @@ around you.</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iyg-aj-60O"/>
                     </view>
-                    <navigationItem key="navigationItem" id="pvM-4M-Mi5"/>
-                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationItem key="navigationItem" id="pvM-4M-Mi5">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="5Xr-iy-NV7">
+                            <connections>
+                                <segue destination="bi8-1w-F3Z" kind="show" id="1em-av-YXu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="stackView" destination="LAt-qJ-pMK" id="iaj-nC-Zd4"/>
                     </connections>
@@ -118,10 +124,10 @@ around you.</string>
             </objects>
             <point key="canvasLocation" x="-271.01449275362319" y="50.892857142857139"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--Weather View Controller-->
         <scene sceneID="thj-G0-f9a">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" id="f07-1G-9eB" customClass="DetailViewController" customModule="WeatherLogger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="f07-1G-9eB" customClass="WeatherViewController" customModule="WeatherLogger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tEL-va-YnN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -150,8 +156,8 @@ around you.</string>
                                                                 <color key="textColor" red="0.6671119928" green="0.85032862419999999" blue="0.89804399010000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="70" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D3d-9q-syH">
-                                                                <rect key="frame" x="0.0" y="57" width="60" height="63.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="70°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D3d-9q-syH">
+                                                                <rect key="frame" x="0.0" y="57" width="80.5" height="63.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="53"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -189,7 +195,7 @@ around you.</string>
                                             <constraint firstAttribute="height" constant="40" id="Bsp-XD-9vC"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="EVn-lR-QNo"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Save">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -204,20 +210,45 @@ around you.</string>
                                     </button>
                                 </subviews>
                             </stackView>
+                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ix6-hC-7Zc">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="TTi-e5-ZNJ">
+                                        <rect key="frame" x="188.5" y="390.5" width="37" height="37"/>
+                                        <color key="color" red="0.33444869519999998" green="0.68160682920000004" blue="0.73334199190000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="TTi-e5-ZNJ" firstAttribute="centerX" secondItem="Ix6-hC-7Zc" secondAttribute="centerX" id="1J4-N0-E59"/>
+                                    <constraint firstItem="TTi-e5-ZNJ" firstAttribute="centerY" secondItem="Ix6-hC-7Zc" secondAttribute="centerY" id="3yS-1k-DGL"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Ix6-hC-7Zc" firstAttribute="leading" secondItem="RW4-wi-5BT" secondAttribute="leading" id="8sP-YB-Ita"/>
                             <constraint firstItem="Syh-N0-tPO" firstAttribute="top" secondItem="RW4-wi-5BT" secondAttribute="top" constant="34" id="BBX-rR-Clq"/>
                             <constraint firstItem="Syh-N0-tPO" firstAttribute="leading" secondItem="RW4-wi-5BT" secondAttribute="leading" constant="45.5" id="O7m-QB-BSq"/>
                             <constraint firstItem="RW4-wi-5BT" firstAttribute="bottom" secondItem="Syh-N0-tPO" secondAttribute="bottom" constant="541" id="bgr-RL-Oz5"/>
+                            <constraint firstItem="Ix6-hC-7Zc" firstAttribute="top" secondItem="RW4-wi-5BT" secondAttribute="top" id="hOA-Gp-sc3"/>
                             <constraint firstItem="Syh-N0-tPO" firstAttribute="centerX" secondItem="tEL-va-YnN" secondAttribute="centerX" id="oWe-9u-ZCO"/>
+                            <constraint firstItem="Ix6-hC-7Zc" firstAttribute="bottom" secondItem="RW4-wi-5BT" secondAttribute="bottom" id="rPR-iP-ZE2"/>
+                            <constraint firstItem="RW4-wi-5BT" firstAttribute="trailing" secondItem="Ix6-hC-7Zc" secondAttribute="trailing" id="vJw-rz-cPk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RW4-wi-5BT"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="I6e-Xf-d4g" id="06N-ML-x8E"/>
+                        <outlet property="loaderView" destination="Ix6-hC-7Zc" id="c2q-8a-cSh"/>
+                        <outlet property="txtCity" destination="ZOs-f5-Hnd" id="Km4-sh-K6b"/>
+                        <outlet property="txtTemperature" destination="D3d-9q-syH" id="IWk-pT-zWk"/>
+                        <outlet property="txtWeatherDescription" destination="z8z-bu-Mah" id="lIV-GB-VN0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l5a-tX-lnv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="589.85507246376812" y="50.892857142857139"/>
+            <point key="canvasLocation" x="699" y="51"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7ib-YC-aHr">
@@ -225,6 +256,7 @@ around you.</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bi8-1w-F3Z" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="bookmarks" id="KEw-9O-W93"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="KvC-3w-sKe"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wcQ-mG-2e7">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -237,7 +269,7 @@ around you.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hNK-yN-dhg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1936" y="-276"/>
+            <point key="canvasLocation" x="700" y="-635"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FUt-q2-ff4">
@@ -256,7 +288,7 @@ around you.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vg-MK-zUI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1345" y="51"/>
+            <point key="canvasLocation" x="-1186" y="51"/>
         </scene>
     </scenes>
 </document>

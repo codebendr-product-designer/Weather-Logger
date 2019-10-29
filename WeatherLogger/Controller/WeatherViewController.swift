@@ -11,6 +11,13 @@ import CoreLocation
 
 class WeatherViewController: UIViewController {
     
+    @IBOutlet weak var loaderView: UIView!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var txtCity: UILabel!
+    @IBOutlet weak var txtWeatherDescription: UILabel!
+    @IBOutlet weak var txtTemperature: UILabel!
+    let degreesSign = "°"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

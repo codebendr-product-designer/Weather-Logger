@@ -8,6 +8,7 @@
 //b5356aff41df4453fbb4cd26d2e817fc
 //icon link - https://openweathermap.org/img/w/10n.png
 import Foundation
+import MapKit
 
 enum EndPoint: String {
     case weather
@@ -24,10 +25,13 @@ enum EndPoint: String {
     }
 }
 
-struct WeatherPhotoURL {
+struct WeatherURL {
     static func get(_ icon: String) -> String {
-          return "https://openweathermap.org/img/w/\(icon).png"
-      }
+        return "https://openweathermap.org/img/w/\(icon).png"
+    }
+    static func load(with coordinate: CLLocationCoordinate2D, completion: (Results)) {
+        
+    }
 }
 
 class WeatherClient<T:Codable>{
