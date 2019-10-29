@@ -7,12 +7,18 @@
 //
 
 import Foundation
+import CoreData
 
 extension Pin {
-    func save() {
-        
-    }
-    func delete() {
-        
+    func fetch(dataStore: DataStore, result: @escaping ([Pin]?) -> Void) {
+        let fetchRequest: NSFetchRequest<Pin> = Pin.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        do {
+            let pins = try dataStore.viewContext.fetch(fetchRequest)
+            result(pins)
+        } catch {
+            result(nil)
+        }
     }
 }

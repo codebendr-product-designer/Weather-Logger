@@ -19,6 +19,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         locationManager.delegate = self
+        
     }
     
     @IBAction func enableLocationButtonPressed(_ sender: Any) {

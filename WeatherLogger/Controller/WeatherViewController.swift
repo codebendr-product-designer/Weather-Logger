@@ -43,11 +43,10 @@ class WeatherViewController: UIViewController {
     @IBAction func btnActionPressed(_ sender: Any) {
         do {
             try dataStore.viewContext.save()
-            //load previous uinavigation view controller
             self.navigationController?.popViewController(animated: true)
         } catch {
             DispatchQueue.main.async {
-                //error saving current weather
+                self.present(Alert.show(.saveError),animated:true)
             }
         }
     }

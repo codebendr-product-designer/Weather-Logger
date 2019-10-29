@@ -35,14 +35,14 @@ struct Alert {
         }
     }
     
-    static func show(type: AlertType, message: String = "", handler: @escaping (UIAlertAction) -> Void = { _ in return }) -> UIAlertController {
+    static func show(_ type: AlertType, message: String = "", handler: @escaping (UIAlertAction) -> Void = { _ in return }) -> UIAlertController {
         let localMessage = message.count != 0 ? message : Alert.localized(type).message
         let alert = UIAlertController(title: Alert.localized(type).title, message: localMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: handler))
         return alert
     }
     
-    static func show(type: AlertType, handler: @escaping (UIAlertAction) -> Void) -> UIAlertController {
+    static func show(_ type: AlertType, handler: @escaping (UIAlertAction) -> Void) -> UIAlertController {
         let alert = UIAlertController(title: Alert.localized(type).title, message: Alert.localized(type).message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: handler))
