@@ -25,16 +25,11 @@ enum EndPoint: String {
 }
 
 struct WeatherURL {
-    static func get(_ icon: String) -> String {
-        return "https://openweathermap.org/img/w/\(icon).png"
-    }
-    static func load(with coordinate: CLLocationCoordinate2D, completion: (Results)) {
-        
-    }
+  
 }
 
-class WeatherClient<T:Codable>{
-    func decode(data: Data, completion: @escaping (Result<T, Error>) -> Void) {
+class WeatherClient {
+    static func decode<T:Codable>(_ object: T.Type,data: Data, completion: @escaping (Result<T, Error>) -> Void) {
         do {
             let decodedResponse =  try JSONDecoder().decode(T.self, from: data)
             completion(Result.success(decodedResponse))
@@ -46,4 +41,11 @@ class WeatherClient<T:Codable>{
             }
         }
     }
+    static func get(_ icon: String) -> String {
+          return "https://openweathermap.org/img/w/\(icon).png"
+      }
+    
+      static func load(with coordinate: CLLocationCoordinate2D, completion: (Results)) {
+          
+      }
 }

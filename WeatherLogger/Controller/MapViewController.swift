@@ -54,6 +54,10 @@ extension MapViewController {
         DispatchQueue.main.async {
             let annotation = PinAnnotation(coordinate: touchMapCoordinate)
             self.mapView.addAnnotation(annotation)
+            
+            Basic.delay(seconds: 2) {
+                
+            }
         }
         
     }

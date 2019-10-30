@@ -103,7 +103,7 @@ extension WeatherViewController {
                         return
                     }
                     
-                    WeatherClient<Weather>().decode(data: data) {
+                    WeatherClient.decode(Weather.self,data: data) {
                         result in
                         
                         switch result {
@@ -143,7 +143,7 @@ extension WeatherViewController {
     func configure(with response: Weather){
         let weather = response.weather[0]
         let main = response.main
-        imageView.download(from: WeatherURL.get(weather.icon))
+        imageView.download(from: WeatherClient.get(weather.icon))
         txtCity.text = annotation.title
         txtWeatherDescription.text = weather.desc
         txtTemperature.text = main.temp.celsius()
