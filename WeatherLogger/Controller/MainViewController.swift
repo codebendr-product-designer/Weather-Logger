@@ -40,6 +40,8 @@ class MainViewController: UIViewController {
         creatCollectionView()
         createDataSource()
         
+        self.edgesForExtendedLayout = .bottom
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -188,12 +190,12 @@ extension MainViewController {
     
     func createCompositonalLayout() -> UICollectionViewLayout {
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.39))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.43))
         
         let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5)
         
-        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(1))
+        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.55))
         
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitems: [layoutItem])
         
@@ -202,9 +204,9 @@ extension MainViewController {
         
         let layout = UICollectionViewCompositionalLayout(section: layoutSection)
         
-        let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 20
-        layout.configuration = config
+        //        let config = UICollectionViewCompositionalLayoutConfiguration()
+        //        config.interSectionSpacing = 20
+        //        layout.configuration = config
         
         return layout
     }

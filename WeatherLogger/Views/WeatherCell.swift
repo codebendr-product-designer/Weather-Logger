@@ -19,18 +19,19 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        let teal = UIColor.systemTeal
         temperature.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         
-        city.font = UIFont.preferredFont(forTextStyle: .headline)
-        city.textColor = .purple
+        city.font = UIFont.preferredFont(forTextStyle: .title2)
+        city.textColor = teal
         
-        desc.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        desc.textColor = .purple
+        desc.font = UIFont.preferredFont(forTextStyle: .title3)
+        desc.textColor = teal
         
-        temperature.textColor = .purple
+        temperature.textColor = teal
         
-        contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.purple.cgColor
+        contentView.layer.borderWidth = 0.6
+        contentView.layer.borderColor = teal.cgColor
         contentView.layer.cornerRadius = 14
         
         imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -67,7 +68,6 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
         
         guard let icon = weather.icon else { return }
         imageView.image = UIImage(data: icon)
-        
         
     }
     

@@ -7,10 +7,10 @@
 //
 
 import Foundation
+import UIKit
 
 extension Double {
     func celsius() -> String {
-       // return (self - 273.15).rounded()
        return "\(String(format:"%g",(self - 273.15).rounded()))°"
     }
 }
