@@ -8,11 +8,12 @@
 
 import UIKit
 
-class WeatherCell: UICollectionViewCell, DefaultCell {
-    static var reuseIdentifier: String = "WeatherCell"
+class SectionHeader: UICollectionReusableView {
+    static var reuseIdentifier: String = "SectionHeader"
     
     let city = UILabel()
     let temperature = UILabel()
+    let humidity = UILabel()
     let desc = UILabel()
     let imageView = UIImageView()
     
@@ -30,9 +31,9 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
         
         temperature.textColor = teal
         
-        contentView.layer.borderWidth = 0.8
-        contentView.layer.borderColor = teal.cgColor
-        contentView.layer.cornerRadius = 14
+        layer.borderWidth = 0.8
+        layer.borderColor = teal.cgColor
+        layer.cornerRadius = 14
         
         imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         temperature.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -48,27 +49,16 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
         hStackMain.spacing = 78
         contentView.addSubview(hStackMain)
         
-        NSLayoutConstraint.activate([
-            hStackMain.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
-            hStackMain.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            hStackMain.topAnchor.constraint(equalTo: contentView.topAnchor),
-            hStackMain.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
+//        NSLayoutConstraint.activate([
+//            hStackMain.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
+//            hStackMain.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+//            hStackMain.topAnchor.constraint(equalTo: contentView.topAnchor),
+//            hStackMain.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+//        ])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configure(with weather: CurrentWeather) {
-        
-        city.text = weather.city
-        desc.text = weather.subtitle
-        temperature.text = weather.temperature.celsius()
-        
-        guard let icon = weather.icon else { return }
-        imageView.image = UIImage(data: icon)
-        
     }
     
 }
