@@ -56,9 +56,9 @@ extension MapViewController {
             self.mapView.addAnnotation(annotation)
             
             let location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
-             self.loadWeatherViewController(location, annotation: annotation)
-            Basic.delay(seconds: 1) {
-               
+          
+            Basic.delay(seconds: 2) {
+                self.loadWeatherViewController(location, annotation: annotation)
                 self.mapView.removeAnnotation(annotation)
             }
         }
@@ -73,32 +73,13 @@ extension MapViewController {
         
         let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
         
-        find(location: location) {
-            placemark in
-            if let placemark = placemark {
-                annotation.title = placemark.locality
-            }
-            
-            weatherViewController.annotation = annotation
-            weatherViewController.dataStore = self.dataStore
-            
-            DispatchQueue.main.async {
-                self.navigationController?.pushViewController(weatherViewController, animated: true)
-            }
-            
+        weatherViewController.annotation = annotation
+        weatherViewController.dataStore = self.dataStore
+        
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(weatherViewController, animated: true)
         }
         
-    }
-    
-    func find(location: CLLocation, placemark: @escaping (CLPlacemark?) -> Void) {
-        let geocode = CLGeocoder()
-        geocode.reverseGeocodeLocation(location) { (placemarks, error) in
-            if error == nil {
-                if let placemarks = placemarks {
-                    placemark(placemarks[0])
-                }
-            }
-        }
     }
     
 }

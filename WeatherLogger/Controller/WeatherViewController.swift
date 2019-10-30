@@ -30,7 +30,18 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadWeather(coordinate: CLLocationCoordinate2D(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude))
+        configureUI(true)
+        
+        find(location: CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)) {
+            placemark in
+            
+            if let placemark = placemark {
+                self.annotation.title = placemark.locality
+            }
+            
+            self.loadWeather(coordinate: CLLocationCoordinate2D(latitude: self.annotation.coordinate.latitude, longitude: self.annotation.coordinate.longitude))
+            
+        }
         
         pin = Pin(context: dataStore.viewContext)
         pin.id = annotation.id
@@ -134,6 +145,17 @@ extension WeatherViewController {
 
 extension WeatherViewController {
     
+    func find(location: CLLocation, placemark: @escaping (CLPlacemark?) -> Void) {
+        let geocode = CLGeocoder()
+        geocode.reverseGeocodeLocation(location) { (placemarks, error) in
+            if error == nil {
+                if let placemarks = placemarks {
+                    placemark(placemarks[0])
+                }
+            }
+        }
+    }
+    
     func configureUI(_ isLoading: Bool) {
         loaderView.isHidden = !isLoading
     }
@@ -148,9 +170,9 @@ extension WeatherViewController {
         txtHumidity.text = "HUMIDITY \(main.humidity)%"
     }
     
-  
     
-
+    
+    
     
 }
 

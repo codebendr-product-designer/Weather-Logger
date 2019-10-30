@@ -12,7 +12,6 @@
 		9F42056A23663CE400D4414F /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056923663CE400D4414F /* Section.swift */; };
 		9F42056C23663F1E00D4414F /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056B23663F1E00D4414F /* WeatherCell.swift */; };
 		9F42056E236647A300D4414F /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056D236647A300D4414F /* WeatherViewController.swift */; };
-		9F420570236647B900D4414F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42056F236647B900D4414F /* DetailViewController.swift */; };
 		9F42057223664BAD00D4414F /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42057123664BAD00D4414F /* PinAnnotation.swift */; };
 		9F42057423664C1800D4414F /* UIStoryboard+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42057323664C1800D4414F /* UIStoryboard+extension.swift */; };
 		9F42057623664C4800D4414F /* UIImageView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42057523664C4800D4414F /* UIImageView+extension.swift */; };
@@ -34,7 +33,6 @@
 		9F70294A2364693E00770F64 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7029492364693E00770F64 /* Weather.swift */; };
 		9F90C8D323677D9D00C995FE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F90C8D223677D9D00C995FE /* MainViewController.swift */; };
 		9FB20B6F23699A4900A7765F /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB20B6E23699A4900A7765F /* SectionHeader.swift */; };
-		9FFE8B892369F91900135DEE /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFE8B882369F91900135DEE /* Location.swift */; };
 		9FFF03B1236842E500E8AC8C /* CurrentWeather+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFF03B0236842E500E8AC8C /* CurrentWeather+extension.swift */; };
 		9FFF03B3236844AD00E8AC8C /* Utils+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFF03B2236844AD00E8AC8C /* Utils+extension.swift */; };
 		9FFF03B5236849DC00E8AC8C /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FFF03B4236849DC00E8AC8C /* Alert.swift */; };
@@ -46,7 +44,6 @@
 		9F42056923663CE400D4414F /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		9F42056B23663F1E00D4414F /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		9F42056D236647A300D4414F /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
-		9F42056F236647B900D4414F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		9F42057123664BAD00D4414F /* PinAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
 		9F42057323664C1800D4414F /* UIStoryboard+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+extension.swift"; sourceTree = "<group>"; };
 		9F42057523664C4800D4414F /* UIImageView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+extension.swift"; sourceTree = "<group>"; };
@@ -70,7 +67,6 @@
 		9F7029492364693E00770F64 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		9F90C8D223677D9D00C995FE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9FB20B6E23699A4900A7765F /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
-		9FFE8B882369F91900135DEE /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		9FFF03B0236842E500E8AC8C /* CurrentWeather+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentWeather+extension.swift"; sourceTree = "<group>"; };
 		9FFF03B2236844AD00E8AC8C /* Utils+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Utils+extension.swift"; sourceTree = "<group>"; };
 		9FFF03B4236849DC00E8AC8C /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -181,7 +177,6 @@
 				9F42056923663CE400D4414F /* Section.swift */,
 				9F42057123664BAD00D4414F /* PinAnnotation.swift */,
 				9F42057B23664D2700D4414F /* DataStore.swift */,
-				9FFE8B882369F91900135DEE /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -193,7 +188,6 @@
 				9F702926236461B500770F64 /* MapViewController.swift */,
 				9F42056D236647A300D4414F /* WeatherViewController.swift */,
 				9F90C8D223677D9D00C995FE /* MainViewController.swift */,
-				9F42056F236647B900D4414F /* DetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -275,7 +269,6 @@
 				9FB20B6F23699A4900A7765F /* SectionHeader.swift in Sources */,
 				9F42057623664C4800D4414F /* UIImageView+extension.swift in Sources */,
 				9F702927236461B500770F64 /* MapViewController.swift in Sources */,
-				9FFE8B892369F91900135DEE /* Location.swift in Sources */,
 				9F42057A23664C8300D4414F /* Pin+extension.swift in Sources */,
 				9F90C8D323677D9D00C995FE /* MainViewController.swift in Sources */,
 				9F702923236461B500770F64 /* AppDelegate.swift in Sources */,
@@ -290,7 +283,6 @@
 				9F42056A23663CE400D4414F /* Section.swift in Sources */,
 				9F42056E236647A300D4414F /* WeatherViewController.swift in Sources */,
 				9F272A4C23682E2D003AC3E5 /* Forecast.swift in Sources */,
-				9F420570236647B900D4414F /* DetailViewController.swift in Sources */,
 				9F42057223664BAD00D4414F /* PinAnnotation.swift in Sources */,
 				9F7029462364643C00770F64 /* Response.swift in Sources */,
 				9F7029402364640F00770F64 /* RestManager.swift in Sources */,

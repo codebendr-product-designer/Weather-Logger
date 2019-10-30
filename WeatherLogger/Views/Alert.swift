@@ -18,6 +18,7 @@ struct Alert {
         case pinDeletion
         case weatherDeletion
         case saveError
+        case locationError
     }
     
     private static func localized(_ type: AlertType) -> (title: String, message: String) {
@@ -32,6 +33,8 @@ struct Alert {
             return (title: "Delete Weather", message: "Are you show you want to delete this")
         case .saveError :
             return (title: "Save Error", message: "Saving did not work")
+        case .locationError :
+            return (title: "Location Services disabled", message: "Please use + button to add weather logs")
         }
     }
     

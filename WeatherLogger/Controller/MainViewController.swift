@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     let locationManager = CLLocationManager()
     var dataStore: DataStore!
     var isLocation = false
+    var isMap = false
     let locationStatus = CLLocationManager.authorizationStatus()
     var currentWeatherList = [CurrentWeather]()
     var dataSource: UICollectionViewDiffableDataSource<Section, CurrentWeather>?
@@ -24,22 +25,14 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+         creatCollectionView()
+        
         locationManager.delegate = self
         
-        if CLLocationManager.locationServicesEnabled() {
-            switch CLLocationManager.authorizationStatus() {
-            case .notDetermined, .restricted, .denied:
-                stackView.isHidden = false
-            case .authorizedAlways, .authorizedWhenInUse:
-                stackView.isHidden = true
-            default :
-                return
-            }
-        }
-        
-        creatCollectionView()
+        isLocationEnabled()
+  
         createDataSource()
-        createHeaderDataSource()
+      //  createHeaderDataSource()
         
         self.edgesForExtendedLayout = .bottom
         
@@ -59,6 +52,7 @@ class MainViewController: UIViewController {
         if CLLocationManager.locationServicesEnabled() {
             switch CLLocationManager.authorizationStatus() {
             case .notDetermined, .restricted, .denied:
+                loadMapViewController()
                 return
             case .authorizedAlways, .authorizedWhenInUse:
                 locationManager.startUpdatingLocation()
@@ -69,13 +63,15 @@ class MainViewController: UIViewController {
         }
     }
     
-    func find(location: CLLocation, placemark: @escaping (CLPlacemark?) -> Void) {
-        let geocode = CLGeocoder()
-        geocode.reverseGeocodeLocation(location) { (placemarks, error) in
-            if error == nil {
-                if let placemarks = placemarks {
-                    placemark(placemarks[0])
-                }
+    func isLocationEnabled() {
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                configureUI(true)
+            case .authorizedAlways, .authorizedWhenInUse:
+                configureUI(false)
+            default :
+                return
             }
         }
     }
@@ -87,15 +83,12 @@ class MainViewController: UIViewController {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
             return
-            
         case .denied, .restricted:
-            let alert = UIAlertController(title: "Location Services disabled", message: "Please enable Location Services in Settings", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(okAction)
-            present(alert, animated: true, completion: nil)
+            stackView.isHidden = false
+            present(Alert.show(.locationError), animated: true)
             return
         case .authorizedAlways, .authorizedWhenInUse:
-            stackView.isHidden = true
+            configureUI(false)
             break
         default:
             return
@@ -122,7 +115,7 @@ extension MainViewController: CLLocationManagerDelegate {
                 let lon = currentLocation.coordinate.longitude
                 let lat = currentLocation.coordinate.latitude
                 
-                loadMapViewController(CLLocation(latitude: lat, longitude: lon), annotation: annotation)
+                loadWeatherViewController(CLLocation(latitude: lat, longitude: lon), annotation: annotation)
                 
                 locationManager.stopUpdatingLocation()
             }
@@ -141,40 +134,24 @@ extension MainViewController {
         
         let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
         
-        find(location: location) {
-            placemark in
-            if let placemark = placemark {
-                annotation.title = placemark.locality
-            }
-            
-            weatherViewController.annotation = annotation
-            weatherViewController.dataStore = self.dataStore
-            
-            DispatchQueue.main.async {
-                self.navigationController?.pushViewController(weatherViewController, animated: true)
-            }
-            
+        weatherViewController.annotation = annotation
+        weatherViewController.dataStore = self.dataStore
+        
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(weatherViewController, animated: true)
         }
         
     }
     
-    func loadMapViewController(_ location: CLLocation, annotation: PinAnnotation) {
+    func loadMapViewController() {
         
         let mapViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
         
-        find(location: location) {
-            placemark in
-            if let placemark = placemark {
-                annotation.title = placemark.locality
-            }
-            
-            mapViewController.annotation = annotation
-            mapViewController.dataStore = self.dataStore
-            
-            DispatchQueue.main.async {
-                self.navigationController?.pushViewController(mapViewController, animated: true)
-            }
-            
+        // mapViewController.annotation = annotation
+        mapViewController.dataStore = self.dataStore
+        
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(mapViewController, animated: true)
         }
         
     }
@@ -186,6 +163,7 @@ extension MainViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Section, CurrentWeather>()
         snapshot.appendSections([Section.main])
         snapshot.appendItems(currentWeatherList)
+        
         dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
@@ -226,7 +204,7 @@ extension MainViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemBackground
         
-        collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
+//        collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
         
         collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: WeatherCell.reuseIdentifier)
         
@@ -236,6 +214,11 @@ extension MainViewController {
 }
 
 extension MainViewController {
+    
+    func configureUI(_ showStackView: Bool) {
+        stackView.isHidden = !showStackView
+        collectionView.isHidden = showStackView
+    }
     
     func createCompositonalLayout() -> UICollectionViewLayout {
         
@@ -252,12 +235,11 @@ extension MainViewController {
         layoutSection.interGroupSpacing = 5
         //layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         
-        let layoutSectionHeader = createSectionHeader()
-        layoutSection.boundarySupplementaryItems  = [layoutSectionHeader]
+//        let layoutSectionHeader = createSectionHeader()
+//        layoutSection.boundarySupplementaryItems  = [layoutSectionHeader]
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 20
-        
         
         let layout = UICollectionViewCompositionalLayout(section: layoutSection)
         layout.configuration = config

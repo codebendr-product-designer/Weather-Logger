@@ -20,7 +20,7 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
         super.init(frame: frame)
         
         let teal = UIColor.systemTeal
-        temperature.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        temperature.font = UIFont.preferredFont(forTextStyle: .title1)
         temperature.textColor = teal
         
         city.font = UIFont.preferredFont(forTextStyle: .title2)
