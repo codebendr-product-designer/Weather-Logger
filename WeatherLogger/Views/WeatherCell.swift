@@ -27,20 +27,22 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
         desc.font = UIFont.preferredFont(forTextStyle: .subheadline)
         desc.textColor = .secondaryLabel
         
-        let innerStackView = UIStackView(arrangedSubviews: [city, desc])
-        innerStackView.axis = .vertical
+        let vStack = UIStackView(arrangedSubviews: [city, desc])
+        vStack.axis = .vertical
+        let hStack = UIStackView(arrangedSubviews: [temperature, vStack])
+        hStack.spacing = 16
         
-        let outerStackView = UIStackView(arrangedSubviews: [temperature,innerStackView, imageView])
-        outerStackView.translatesAutoresizingMaskIntoConstraints = false
-        outerStackView.alignment = .center
-        outerStackView.spacing = 10
-        contentView.addSubview(outerStackView)
+        let hStackMain = UIStackView(arrangedSubviews: [hStack, imageView])
+        hStackMain.translatesAutoresizingMaskIntoConstraints = false
+        hStackMain.alignment = .center
+        hStackMain.spacing = 10
+        contentView.addSubview(hStackMain)
         
         NSLayoutConstraint.activate([
-            outerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            outerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            outerStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            outerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            hStackMain.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            hStackMain.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            hStackMain.topAnchor.constraint(equalTo: contentView.topAnchor),
+            hStackMain.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
