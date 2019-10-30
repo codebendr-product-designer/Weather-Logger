@@ -36,7 +36,7 @@
             </objects>
             <point key="canvasLocation" x="1561" y="-635"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Weather -->
         <scene sceneID="gMt-il-jGG">
             <objects>
                 <viewController id="xGt-QW-VzK" customClass="MainViewController" customModule="WeatherLogger" customModuleProvider="target" sceneMemberID="viewController">
@@ -126,7 +126,7 @@ around you.</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iyg-aj-60O"/>
                     </view>
-                    <navigationItem key="navigationItem" id="pvM-4M-Mi5">
+                    <navigationItem key="navigationItem" title="Weather " largeTitleDisplayMode="always" id="pvM-4M-Mi5">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="5Xr-iy-NV7">
                             <connections>
                                 <action selector="addLocationButtonPressed:" destination="xGt-QW-VzK" id="cn8-QE-peb"/>

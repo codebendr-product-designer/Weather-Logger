@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SectionHeader: UICollectionReusableView {
+class SectionHeader: UICollectionReusableView, DefaultCell {
     static var reuseIdentifier: String = "SectionHeader"
     
     let city = UILabel()
@@ -20,45 +20,61 @@ class SectionHeader: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let teal = UIColor.systemTeal
-        temperature.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        
-        city.font = UIFont.preferredFont(forTextStyle: .title2)
-        //city.textColor = teal
-        
-        desc.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        // desc.textColor = teal
-        
-        temperature.textColor = teal
-        
+        backgroundColor = UIColor.systemTeal
         layer.borderWidth = 0.8
-        layer.borderColor = teal.cgColor
         layer.cornerRadius = 14
         
+                print("SectionHeader")
+        
+        temperature.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        temperature.textColor = .white
+        
+        city.font = UIFont.preferredFont(forTextStyle: .title2)
+        city.textColor = .white
+        
+        desc.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        desc.textColor = .white
+        
+        humidity.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        humidity.textColor = .white
+
         imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         temperature.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
-        let vStack = UIStackView(arrangedSubviews: [city, desc])
+        let hStack = UIStackView(arrangedSubviews: [city, desc, temperature, humidity])
+        
+        let vStack = UIStackView(arrangedSubviews: [hStack, imageView])
+        vStack.translatesAutoresizingMaskIntoConstraints = false
         vStack.axis = .vertical
-        let hStack = UIStackView(arrangedSubviews: [temperature, vStack])
-        hStack.spacing = 16
+        vStack.spacing = 16
         
-        let hStackMain = UIStackView(arrangedSubviews: [hStack, imageView])
-        hStackMain.translatesAutoresizingMaskIntoConstraints = false
-        hStackMain.alignment = .center
-        hStackMain.spacing = 78
-        contentView.addSubview(hStackMain)
+        addSubview(vStack)
         
-//        NSLayoutConstraint.activate([
-//            hStackMain.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
-//            hStackMain.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-//            hStackMain.topAnchor.constraint(equalTo: contentView.topAnchor),
-//            hStackMain.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-//        ])
+        let spacing: CGFloat = 16
+        
+        NSLayoutConstraint.activate([
+            vStack.leadingAnchor.constraint(equalTo: leadingAnchor,constant: spacing),
+            vStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: spacing),
+            vStack.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
+            vStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: spacing)
+        ])
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(with weather: CurrentWeather) {
+        print("CONFIGURE")
+        city.text = weather.city
+        desc.text = weather.subtitle
+        humidity.text = weather.humidity
+        temperature.text = weather.temperature.celsius()
+        
+        guard let icon = weather.icon else { return }
+        imageView.image = UIImage(data: icon)
+        
     }
     
 }

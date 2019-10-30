@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
     var isLocation = false
     let locationStatus = CLLocationManager.authorizationStatus()
     var currentWeatherList = [CurrentWeather]()
-    var dataSource: UICollectionViewDiffableDataSource<Section, CurrentWeather>?
+    var dataSource: UICollectionViewDiffableDataSource<Section, CurrentWeather>! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +91,6 @@ class MainViewController: UIViewController {
             let alert = UIAlertController(title: "Location Services disabled", message: "Please enable Location Services in Settings", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okAction)
-            
             present(alert, animated: true, completion: nil)
             return
         case .authorizedAlways, .authorizedWhenInUse:
@@ -108,7 +107,6 @@ class MainViewController: UIViewController {
 }
 
 extension MainViewController: CLLocationManagerDelegate {
-    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -152,7 +150,6 @@ extension MainViewController: CLLocationManagerDelegate {
 
 extension MainViewController {
     
-    
     func reloadData() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, CurrentWeather>()
         snapshot.appendSections([Section.main])
@@ -169,18 +166,39 @@ extension MainViewController {
     }
     
     func createDataSource() {
+        
         dataSource = UICollectionViewDiffableDataSource<Section,CurrentWeather>(collectionView: collectionView) {
             collectionView, indexPath, weather in
             return self.configure(WeatherCell.self, with: weather, for: indexPath)
         }
+        
+        dataSource.supplementaryViewProvider = { (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
+            
+            guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseIdentifier, for: indexPath) as? SectionHeader else {
+                fatalError("Cannot create new header")
+            }
+            
+            guard let weather = self.currentWeatherList.last else {
+                return nil
+            }
+            
+            sectionHeader.configure(with: weather)
+            return sectionHeader
+            
+        }
     }
     
     func creatCollectionView() {
+        
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositonalLayout())
         collectionView.delegate = self
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemBackground
+        
+        collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: SectionHeader.reuseIdentifier, withReuseIdentifier: SectionHeader.reuseIdentifier)
+        
         collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: WeatherCell.reuseIdentifier)
+        
         view.addSubview(collectionView)
     }
     
@@ -200,15 +218,28 @@ extension MainViewController {
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitems: [layoutItem])
         
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-      //  layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        //layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         
         let layout = UICollectionViewCompositionalLayout(section: layoutSection)
         
-        //        let config = UICollectionViewCompositionalLayoutConfiguration()
-        //        config.interSectionSpacing = 20
-        //        layout.configuration = config
+        let layoutSectionHeader = createSectionHeader()
+        layoutSection.boundarySupplementaryItems  = [layoutSectionHeader]
+        
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 20
+        layout.configuration = config
         
         return layout
+    }
+    
+    func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+        
+        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(80))
+        
+        let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: SectionHeader.reuseIdentifier, alignment: .top)
+        layoutSectionHeader.pinToVisibleBounds = true
+        return layoutSectionHeader
+        
     }
     
 }
@@ -218,6 +249,3 @@ extension MainViewController: UICollectionViewDelegate {
         
     }
 }
-
-
-

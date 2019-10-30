@@ -45,7 +45,6 @@ class WeatherViewController: UIViewController {
     }
     
     @IBAction func btnActionPressed(_ sender: Any) {
-        print("current weather \(String(describing: currentWeather)))")
         do {
             try dataStore.viewContext.save()
             self.navigationController?.popViewController(animated: true)
@@ -108,7 +107,7 @@ extension WeatherViewController {
                             print(weatherError)
                             
                         }
-                        
+
                     }
                     
                 } else {
@@ -140,9 +139,7 @@ extension WeatherViewController {
         txtTemperature.text = main.temp.celsius()
         txtHumidity.text = "HUMIDITY \(main.humidity)%"
     }
-    
-    
-    
+ 
 }
 
 

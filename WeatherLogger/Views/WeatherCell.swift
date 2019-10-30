@@ -21,14 +21,13 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
         
         let teal = UIColor.systemTeal
         temperature.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        temperature.textColor = teal
         
         city.font = UIFont.preferredFont(forTextStyle: .title2)
-        //city.textColor = teal
         
         desc.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        // desc.textColor = teal
         
-        temperature.textColor = teal
+        imageView.backgroundColor = .clear
         
         contentView.layer.borderWidth = 0.8
         contentView.layer.borderColor = teal.cgColor
