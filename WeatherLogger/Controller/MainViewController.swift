@@ -39,6 +39,7 @@ class MainViewController: UIViewController {
         
         creatCollectionView()
         createDataSource()
+        createHeaderDataSource()
         
         self.edgesForExtendedLayout = .bottom
         
@@ -171,7 +172,9 @@ extension MainViewController {
             collectionView, indexPath, weather in
             return self.configure(WeatherCell.self, with: weather, for: indexPath)
         }
-        
+    }
+    
+    func createHeaderDataSource() {
         dataSource.supplementaryViewProvider = { (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
             
             guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseIdentifier, for: indexPath) as? SectionHeader else {
@@ -218,25 +221,27 @@ extension MainViewController {
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitems: [layoutItem])
         
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+        layoutSection.interGroupSpacing = 5
         //layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-        
-        let layout = UICollectionViewCompositionalLayout(section: layoutSection)
         
         let layoutSectionHeader = createSectionHeader()
         layoutSection.boundarySupplementaryItems  = [layoutSectionHeader]
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 20
-        layout.configuration = config
+       
         
+        let layout = UICollectionViewCompositionalLayout(section: layoutSection)
+         layout.configuration = config
         return layout
     }
     
     func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         
-        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(80))
+        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.25))
         
         let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: SectionHeader.reuseIdentifier, alignment: .top)
+        
         layoutSectionHeader.pinToVisibleBounds = true
         return layoutSectionHeader
         
