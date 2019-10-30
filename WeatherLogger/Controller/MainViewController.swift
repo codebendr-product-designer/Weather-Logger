@@ -37,17 +37,35 @@ class MainViewController: UIViewController {
             }
         }
         
-        CurrentWeather(context: dataStore.viewContext).fetch {
+        creatCollectionView()
+        createDataSource()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        dataStore.fetch {
             weatherList in
             guard let weatherList = weatherList else { return }
             self.currentWeatherList = weatherList
+            self.reloadData()
         }
-        
-        creatCollectionView()
-        createDataSource()
-        reloadData()
     }
     
+    @IBAction func addLocationButtonPressed(_ sender: Any) {
+        
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                return
+            case .authorizedAlways, .authorizedWhenInUse:
+                locationManager.startUpdatingLocation()
+                isLocation = false
+            default :
+                return
+            }
+        }
+        
+    }
     
     func find(location: CLLocation, placemark: @escaping (CLPlacemark?) -> Void) {
         let geocode = CLGeocoder()
@@ -158,8 +176,10 @@ extension MainViewController {
     
     func creatCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositonalLayout())
+        collectionView.delegate = self
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemBackground
+        collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: WeatherCell.reuseIdentifier)
         view.addSubview(collectionView)
     }
     
@@ -179,7 +199,7 @@ extension MainViewController {
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitems: [layoutItem])
         
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+      //  layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         
         let layout = UICollectionViewCompositionalLayout(section: layoutSection)
         
@@ -190,6 +210,12 @@ extension MainViewController {
         return layout
     }
     
+}
+
+extension MainViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
 }
 
 

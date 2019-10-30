@@ -28,9 +28,39 @@ class DataStore {
         }
     }
     
-    func saveData(_ data: Data, id: String) {
-        
+    func fetch(_ result: @escaping ([CurrentWeather]?) -> Void) {
+        let fetchRequest: NSFetchRequest<CurrentWeather> = CurrentWeather.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+ 
+        do {
+            let currentWeatherList = try viewContext.fetch(fetchRequest)
+            result(currentWeatherList)
+        } catch {
+            result(nil)
+        }
     }
+    
+    func delete(with id: String, _ completed: (Bool) -> Void) {
+         
+         let fetchRequest: NSFetchRequest<CurrentWeather> = CurrentWeather.fetchRequest()
+         let predicate = NSPredicate(format: "id == %@", id)
+         fetchRequest.predicate = predicate
+         
+         do {
+             let currentWeatherList = try viewContext.fetch(fetchRequest)
+             for currentWeather in currentWeatherList {
+                 viewContext.delete(currentWeather)
+             }
+             completed(true)
+             try viewContext.save()
+             
+         } catch {
+             completed(false)
+         }
+     }
+    
+    
 }
 
 extension DataStore {

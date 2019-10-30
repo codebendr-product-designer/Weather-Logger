@@ -129,7 +129,7 @@ around you.</string>
                     <navigationItem key="navigationItem" id="pvM-4M-Mi5">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="5Xr-iy-NV7">
                             <connections>
-                                <segue destination="bi8-1w-F3Z" kind="show" id="1em-av-YXu"/>
+                                <action selector="addLocationButtonPressed:" destination="xGt-QW-VzK" id="cn8-QE-peb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

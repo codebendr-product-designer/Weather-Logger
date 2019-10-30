@@ -19,6 +19,8 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        temperature.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        
         city.font = UIFont.preferredFont(forTextStyle: .headline)
         city.textColor = .label
         
@@ -49,8 +51,8 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
     func configure(with weather: CurrentWeather) {
         
         city.text = weather.city
-        desc.text = weather.description
-        temperature.text = "\(weather.temperature)"
+        desc.text = weather.subtitle
+        temperature.text = weather.temperature.celsius()
         
         guard let icon = weather.icon else { return }
         imageView.image = UIImage(data: icon)

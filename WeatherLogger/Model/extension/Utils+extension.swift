@@ -9,7 +9,9 @@
 import Foundation
 
 extension Double {
-    func celsius() -> Double {
-        return (self - 273.15).rounded()
+    func celsius() -> String {
+       // return (self - 273.15).rounded()
+       return "\(String(format:"%g",(self - 273.15).rounded()))°"
     }
 }
+

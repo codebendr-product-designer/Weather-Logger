@@ -137,8 +137,7 @@ extension WeatherViewController {
         }
         txtCity.text = annotation.title
         txtWeatherDescription.text = weather.desc
-        let celsius =  String(format:"%g",main.temp.celsius())
-        txtTemperature.text = "\(celsius)\(degreesSign)"
+        txtTemperature.text = main.temp.celsius()
         txtHumidity.text = "HUMIDITY \(main.humidity)%"
     }
     
