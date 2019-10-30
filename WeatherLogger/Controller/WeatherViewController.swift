@@ -30,14 +30,12 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadWeather(coordinate: CLLocationCoordinate2D(latitude: 35, longitude: -139))
+        loadWeather(coordinate: CLLocationCoordinate2D(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude))
         
         pin = Pin(context: dataStore.viewContext)
         pin.id = annotation.id
         pin.latitude = annotation.coordinate.latitude
         pin.longitude = annotation.coordinate.longitude
-        
-        
         
     }
     
@@ -61,7 +59,7 @@ class WeatherViewController: UIViewController {
         
         do {
             try dataStore.viewContext.save()
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
         } catch {
             DispatchQueue.main.async {
                 self.present(Alert.show(.saveError),animated:true)
@@ -149,6 +147,10 @@ extension WeatherViewController {
         txtTemperature.text = main.temp.celsius()
         txtHumidity.text = "HUMIDITY \(main.humidity)%"
     }
+    
+  
+    
+
     
 }
 

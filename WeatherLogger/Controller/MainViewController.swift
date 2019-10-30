@@ -117,26 +117,12 @@ extension MainViewController: CLLocationManagerDelegate {
             
             if let currentLocation = locations.last {
                 
-                let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
-                
                 let annotation = PinAnnotation(coordinate: currentLocation.coordinate)
                 
                 let lon = currentLocation.coordinate.longitude
                 let lat = currentLocation.coordinate.latitude
-                find(location: CLLocation(latitude: lat, longitude: lon)) {
-                    placemark in
-                    if let placemark = placemark {
-                        annotation.title = placemark.locality
-                    }
-                    
-                    weatherViewController.annotation = annotation
-                    weatherViewController.dataStore = self.dataStore
-                    
-                    DispatchQueue.main.async {
-                        self.navigationController?.pushViewController(weatherViewController, animated: true)
-                    }
-                    
-                }
+                
+                loadMapViewController(CLLocation(latitude: lat, longitude: lon), annotation: annotation)
                 
                 locationManager.stopUpdatingLocation()
             }
@@ -147,6 +133,51 @@ extension MainViewController: CLLocationManagerDelegate {
         print(error)
     }
     
+}
+
+extension MainViewController {
+    
+    func loadWeatherViewController(_ location: CLLocation, annotation: PinAnnotation) {
+        
+        let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
+        
+        find(location: location) {
+            placemark in
+            if let placemark = placemark {
+                annotation.title = placemark.locality
+            }
+            
+            weatherViewController.annotation = annotation
+            weatherViewController.dataStore = self.dataStore
+            
+            DispatchQueue.main.async {
+                self.navigationController?.pushViewController(weatherViewController, animated: true)
+            }
+            
+        }
+        
+    }
+    
+    func loadMapViewController(_ location: CLLocation, annotation: PinAnnotation) {
+        
+        let mapViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        
+        find(location: location) {
+            placemark in
+            if let placemark = placemark {
+                annotation.title = placemark.locality
+            }
+            
+            mapViewController.annotation = annotation
+            mapViewController.dataStore = self.dataStore
+            
+            DispatchQueue.main.async {
+                self.navigationController?.pushViewController(mapViewController, animated: true)
+            }
+            
+        }
+        
+    }
 }
 
 extension MainViewController {

@@ -26,15 +26,15 @@ struct Weather: Codable, Hashable {
 
 // MARK: - Coord
 struct Coord: Codable {
-    let lon, lat: Int
+    let lon, lat: Double
 }
 
 // MARK: - Main
 struct Main: Codable {
-    let temp: Double
-    let pressure, humidity: Int
-    let tempMin, tempMax: Double
-    let seaLevel, grndLevel: Int
+    let temp, humidity : Double
+    let pressure : Int?
+    let tempMin, tempMax: Double?
+    let grndLevel, seaLevel: Int?
 
     enum CodingKeys: String, CodingKey {
         case temp, pressure, humidity
