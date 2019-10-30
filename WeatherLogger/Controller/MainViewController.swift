@@ -43,9 +43,9 @@ class MainViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        dataStore.fetch {
+        dataStore.fetch(CurrentWeather.self){
             weatherList in
-            guard let weatherList = weatherList else { return }
+            guard let weatherList = weatherList as? [CurrentWeather] else { return }
             self.currentWeatherList = weatherList
             self.reloadData()
         }
@@ -160,7 +160,7 @@ extension MainViewController {
     }
     
     func configure<T: DefaultCell>(_ cellType: T.Type, with weather: CurrentWeather, for indexPath: IndexPath) -> T {
-        guard  let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifier, for: indexPath) as? T else {
+        guard let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifier, for: indexPath) as? T else {
             fatalError("Unable to dequeue \(cellType)")
         }
         cell.configure(with: weather)
