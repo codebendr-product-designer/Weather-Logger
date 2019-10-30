@@ -18,18 +18,16 @@ class MainViewController: UIViewController {
     var dataStore: DataStore!
     var isLocation = false
     let locationStatus = CLLocationManager.authorizationStatus()
-    var currentWeather: CurrentWeather!
+    var currentWeatherList = [CurrentWeather]()
     var dataSource: UICollectionViewDiffableDataSource<Section, CurrentWeather>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentWeather = CurrentWeather(context: dataStore.viewContext)
-        
-        currentWeather.fetch {
+            CurrentWeather(context: dataStore.viewContext).fetch {
             weatherList in
             guard let weatherList = weatherList else { return }
-            
+            self.currentWeatherList = weatherList
         }
         
         locationManager.delegate = self
@@ -152,34 +150,27 @@ extension MainViewController {
     
     func reloadData() {
           var snapshot = NSDiffableDataSourceSnapshot<Section, CurrentWeather>()
-          snapshot.appendSections(sections)
-          
-          for section in sections {
-              snapshot.appendItems(section.items, toSection: section)
-          }
-          
-          dataSource?.apply(snapshot)
+        snapshot.appendSections([Section.main])
+        snapshot.appendItems(currentWeatherList)
+        dataSource?.apply(snapshot, animatingDifferences: true)
       }
     
     func configure<T: DefaultCell>(_ cellType: T.Type, with weather: CurrentWeather, for indexPath: IndexPath) -> T {
         guard  let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifier, for: indexPath) as? T else {
              fatalError("Unable to dequeue \(cellType)")
          }
-         cell.configure(with: currentWeather)
+         cell.configure(with: weather)
          return cell
      }
     
     func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section,CurrentWeather>(collectionView: collectionView) {
             collectionView, indexPath, weather in
-            switch self.sections[indexPath.section].type {
-            default:
-                return self.configure(TableViewCell.self, with: weather, for: indexPath)
-            }
+             return self.configure(WeatherCell.self, with: weather, for: indexPath)
         }
     }
     
-    func createMediumTableSection(using section: Section) -> NSCollectionLayoutSection {
+    func createMediumTableSection() -> NSCollectionLayoutSection {
         
          let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.33))
          

@@ -28,7 +28,7 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
         let innerStackView = UIStackView(arrangedSubviews: [city, desc])
         innerStackView.axis = .vertical
         
-        let outerStackView = UIStackView(arrangedSubviews: [innerStackView, imageView])
+        let outerStackView = UIStackView(arrangedSubviews: [temperature,innerStackView, imageView])
         outerStackView.translatesAutoresizingMaskIntoConstraints = false
         outerStackView.alignment = .center
         outerStackView.spacing = 10
@@ -48,19 +48,12 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
     
     func configure(with weather: CurrentWeather) {
         
-        image.download(from: WeatherURL.get(weather.icon)) {
-            data in
-            guard let data = data else {return}
-            self.currentWeather.icon = data.jpegData(compressionQuality: 1)
-        }
-        city.text = annotation.title
-        desc.text = weather.desc
-        let celsius =  String(format:"%g",main.temp.celsius())
-        txtTemperature.text = "\(celsius)\(degreesSign)"
-        txtHumidity.text = "HUMIDITY \(main.humidity)%"
+        city.text = weather.city
+        desc.text = weather.description
+        temperature.text = "\(weather.temperature)"
         
-        let gaurd icon = icon else { return }
-        imageView.image = UIImage(data: weather.icon)
+        guard let icon = weather.icon else { return }
+        imageView.image = UIImage(data: icon)
         
         
     }
