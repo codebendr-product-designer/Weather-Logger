@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-            CurrentWeather(context: dataStore.viewContext).fetch {
+        CurrentWeather(context: dataStore.viewContext).fetch {
             weatherList in
             guard let weatherList = weatherList else { return }
             self.currentWeatherList = weatherList
@@ -49,20 +49,6 @@ class MainViewController: UIViewController {
         view.addSubview(collectionView)
     }
     
-    func createCompositonalLayout() -> UICollectionViewLayout {
-          let layout = UICollectionViewCompositionalLayout {
-              sectionIndex, layoutEnviroment in
-              let section = self.sections[sectionIndex]
-              switch section.type {
-              default:
-                  return self.createMediumTableSection(using: section)
-              }
-          }
-          let config = UICollectionViewCompositionalLayoutConfiguration()
-          config.interSectionSpacing = 20
-          layout.configuration = config
-          return layout
-      }
     
     func find(location: CLLocation, placemark: @escaping (CLPlacemark?) -> Void) {
         let geocode = CLGeocoder()
@@ -149,43 +135,53 @@ extension MainViewController: CLLocationManagerDelegate {
 extension MainViewController {
     
     func reloadData() {
-          var snapshot = NSDiffableDataSourceSnapshot<Section, CurrentWeather>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, CurrentWeather>()
         snapshot.appendSections([Section.main])
         snapshot.appendItems(currentWeatherList)
         dataSource?.apply(snapshot, animatingDifferences: true)
-      }
+    }
     
     func configure<T: DefaultCell>(_ cellType: T.Type, with weather: CurrentWeather, for indexPath: IndexPath) -> T {
         guard  let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifier, for: indexPath) as? T else {
-             fatalError("Unable to dequeue \(cellType)")
-         }
-         cell.configure(with: weather)
-         return cell
-     }
+            fatalError("Unable to dequeue \(cellType)")
+        }
+        cell.configure(with: weather)
+        return cell
+    }
     
     func createDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section,CurrentWeather>(collectionView: collectionView) {
             collectionView, indexPath, weather in
-             return self.configure(WeatherCell.self, with: weather, for: indexPath)
+            return self.configure(WeatherCell.self, with: weather, for: indexPath)
         }
     }
     
-    func createMediumTableSection() -> NSCollectionLayoutSection {
+}
+
+extension MainViewController {
+    
+    func createCompositonalLayout() -> UICollectionViewLayout {
         
-         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.33))
-         
-         let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
-         layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
-         
-         let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .fractionalWidth(0.55))
-         
-         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitems: [layoutItem])
-         
-         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-         layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-         
-         return layoutSection
-     }
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.33))
+        
+        let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5)
+        
+        let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .fractionalWidth(0.55))
+        
+        let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitems: [layoutItem])
+        
+        let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+        layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        
+        let layout = UICollectionViewCompositionalLayout(section: layoutSection)
+        
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 20
+        layout.configuration = config
+        
+        return layout
+    }
     
 }
 
