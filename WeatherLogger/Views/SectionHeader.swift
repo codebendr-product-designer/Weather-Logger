@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SectionHeader: UICollectionReusableView, DefaultCell {
+class SectionHeader: UICollectionReusableView {
     static var reuseIdentifier: String = "SectionHeader"
     
     let city = UILabel()
@@ -21,10 +21,7 @@ class SectionHeader: UICollectionReusableView, DefaultCell {
         super.init(frame: frame)
         
         backgroundColor = UIColor.systemTeal
-        layer.borderWidth = 0.8
-        layer.cornerRadius = 14
-        
-                print("SectionHeader")
+        layoutMargins = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2);
         
         temperature.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         temperature.textColor = .white
@@ -37,16 +34,21 @@ class SectionHeader: UICollectionReusableView, DefaultCell {
         
         humidity.font = UIFont.preferredFont(forTextStyle: .subheadline)
         humidity.textColor = .white
-
+        
         imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         temperature.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
+        imageView.sizeThatFits(.init(width: 60, height: 60))
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .clear
+        
         let hStack = UIStackView(arrangedSubviews: [city, desc, temperature, humidity])
+        hStack.axis = .vertical
         
         let vStack = UIStackView(arrangedSubviews: [hStack, imageView])
         vStack.translatesAutoresizingMaskIntoConstraints = false
-        vStack.axis = .vertical
-        vStack.spacing = 16
+        vStack.alignment = .center
+        vStack.spacing = 60
         
         addSubview(vStack)
         
@@ -65,16 +67,26 @@ class SectionHeader: UICollectionReusableView, DefaultCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with weather: CurrentWeather) {
-        print("CONFIGURE")
-        city.text = weather.city
-        desc.text = weather.subtitle
-        humidity.text = weather.humidity
-        temperature.text = weather.temperature.celsius()
-        
-        guard let icon = weather.icon else { return }
-        imageView.image = UIImage(data: icon)
-        
+    private func reset() {
+        let empty = ""
+        city.text  = empty
+        desc.text = empty
+        humidity.text = empty
+        temperature.text = empty
     }
     
+    func configure(with weather: CurrentWeather?) {
+        if let weather = weather {
+            city.text = weather.city
+            desc.text = weather.subtitle
+            humidity.text = "HUMIDITY \(weather.humidity!)%"
+            temperature.text = weather.temperature.celsius()
+            
+            guard let icon = weather.icon else { return }
+            imageView.image = UIImage(data: icon)
+        } else {
+            reset()
+        }
+    }
+ 
 }

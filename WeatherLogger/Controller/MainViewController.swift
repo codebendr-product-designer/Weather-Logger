@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
     var isLocation = false
     let locationStatus = CLLocationManager.authorizationStatus()
     var currentWeatherList = [CurrentWeather]()
-    var dataSource: UICollectionViewDiffableDataSource<Section, CurrentWeather>! = nil
+    var dataSource: UICollectionViewDiffableDataSource<Section, CurrentWeather>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +51,7 @@ class MainViewController: UIViewController {
             guard let weatherList = weatherList as? [CurrentWeather] else { return }
             self.currentWeatherList = weatherList
             self.reloadData()
+            self.collectionView.collectionViewLayout.invalidateLayout()
         }
     }
     
@@ -175,17 +176,14 @@ extension MainViewController {
     }
     
     func createHeaderDataSource() {
-        dataSource.supplementaryViewProvider = { (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
+        dataSource?.supplementaryViewProvider = { (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
             
             guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseIdentifier, for: indexPath) as? SectionHeader else {
                 fatalError("Cannot create new header")
             }
             
-            guard let weather = self.currentWeatherList.last else {
-                return nil
-            }
+            sectionHeader.configure(with: self.currentWeatherList.last)
             
-            sectionHeader.configure(with: weather)
             return sectionHeader
             
         }
@@ -198,7 +196,7 @@ extension MainViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemBackground
         
-        collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: SectionHeader.reuseIdentifier, withReuseIdentifier: SectionHeader.reuseIdentifier)
+        collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
         
         collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: WeatherCell.reuseIdentifier)
         
@@ -229,18 +227,18 @@ extension MainViewController {
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 20
-       
+        
         
         let layout = UICollectionViewCompositionalLayout(section: layoutSection)
-         layout.configuration = config
+        layout.configuration = config
         return layout
     }
     
     func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         
-        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.25))
+        let layoutSectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.22))
         
-        let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: SectionHeader.reuseIdentifier, alignment: .top)
+        let layoutSectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         
         layoutSectionHeader.pinToVisibleBounds = true
         return layoutSectionHeader

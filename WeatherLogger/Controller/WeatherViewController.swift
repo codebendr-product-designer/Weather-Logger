@@ -24,6 +24,7 @@ class WeatherViewController: UIViewController {
     var annotation: PinAnnotation!
     var dataStore: DataStore!
     var currentWeather: CurrentWeather!
+    var weather: Weather!
     var pin: Pin!
     
     override func viewDidLoad() {
@@ -36,15 +37,28 @@ class WeatherViewController: UIViewController {
         pin.latitude = annotation.coordinate.latitude
         pin.longitude = annotation.coordinate.longitude
         
+        
+        
+    }
+    
+    func createCurrentWeather() {
+        
         currentWeather = CurrentWeather(context: dataStore.viewContext)
         currentWeather.id = UUID().uuidString
         currentWeather.createdAt = Date()
         currentWeather.pinID = pin.id
         currentWeather.city = annotation.title
+        currentWeather.prepare(toSave: weather)
+        
+        guard let image = imageView.image else {return}
+        currentWeather.icon = image.pngData()
         
     }
     
     @IBAction func btnActionPressed(_ sender: Any) {
+        
+        createCurrentWeather()
+        
         do {
             try dataStore.viewContext.save()
             self.navigationController?.popViewController(animated: true)
@@ -95,7 +109,7 @@ extension WeatherViewController {
                         switch result {
                             
                         case .success(let response):
-                            self.currentWeather.prepare(toSave: response)
+                            self.weather = response
                             DispatchQueue.main.async {
                                 self.configure(with: response)
                             }
@@ -107,7 +121,7 @@ extension WeatherViewController {
                             print(weatherError)
                             
                         }
-
+                        
                     }
                     
                 } else {
@@ -129,17 +143,13 @@ extension WeatherViewController {
     func configure(with response: Weather){
         let weather = response.weather[0]
         let main = response.main
-        imageView.download(from: WeatherURL.get(weather.icon)) {
-            data in
-            guard let data = data else {return}
-            self.currentWeather.icon = data.jpegData(compressionQuality: 1)
-        }
+        imageView.download(from: WeatherURL.get(weather.icon))
         txtCity.text = annotation.title
         txtWeatherDescription.text = weather.desc
         txtTemperature.text = main.temp.celsius()
         txtHumidity.text = "HUMIDITY \(main.humidity)%"
     }
- 
+    
 }
 
 
