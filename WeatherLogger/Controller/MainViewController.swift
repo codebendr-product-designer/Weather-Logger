@@ -51,7 +51,6 @@ class MainViewController: UIViewController {
             guard let weatherList = weatherList as? [CurrentWeather] else { return }
             self.currentWeatherList = weatherList
             self.reloadData()
-            self.collectionView.collectionViewLayout.invalidateLayout()
         }
     }
     
@@ -183,7 +182,7 @@ extension MainViewController {
             }
             
             sectionHeader.configure(with: self.currentWeatherList.last)
-            
+            sectionHeader.setNeedsLayout()
             return sectionHeader
             
         }

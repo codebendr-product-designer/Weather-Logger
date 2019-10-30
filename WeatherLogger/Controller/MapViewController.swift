@@ -15,7 +15,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     var dataStore: DataStore!
-    var annotations = [PinAnnotation]()
+    var annotation:PinAnnotation!
     let regionRadius: CLLocationDistance = 1000000
     
     override func viewDidLoad() {
@@ -23,9 +23,7 @@ class MapViewController: UIViewController {
         
         mapView.delegate = self
         setupMap()
-        
         mapLongPressGesture()
-        fetchPins()
     }
     
 }
@@ -53,32 +51,35 @@ extension MapViewController {
         let touchPoint = gestureRecognizer.location(in: mapView)
         let touchMapCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         
-    }
-    
-    func fetchPins () {
-        let fetchRequest: NSFetchRequest<Pin> = Pin.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        do {
-            setupPins(pins: try dataStore.viewContext.fetch(fetchRequest))
-        } catch {
-            fatalError("The fetch could not be performed: \(error.localizedDescription)")
+        DispatchQueue.main.async {
+            let annotation = PinAnnotation(coordinate: touchMapCoordinate)
+            self.mapView.addAnnotation(annotation)
         }
+        
     }
     
-    func setupPins(pins: [Pin]) {
-        annotations = pins.map { pin in
-            let lat = CLLocationDegrees(pin.latitude)
-            let long = CLLocationDegrees(pin.longitude)
-            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            let pinAnnotation = PinAnnotation(coordinate: coordinate)
-            pinAnnotation.title = "View Photos"
-            pinAnnotation.id = pin.id!
-            return pinAnnotation
+}
+
+extension MapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.animatesDrop = true
+            pinView!.pinTintColor = .red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            pinView!.leftCalloutAccessoryView = UIButton(type: .close)
+        } else {
+            pinView!.annotation = annotation
         }
-        self.mapView.addAnnotations(annotations)
+        return pinView
     }
-    
     
 }
 
