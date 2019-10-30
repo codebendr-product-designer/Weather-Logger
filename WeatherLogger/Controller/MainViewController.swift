@@ -24,12 +24,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        CurrentWeather(context: dataStore.viewContext).fetch {
-            weatherList in
-            guard let weatherList = weatherList else { return }
-            self.currentWeatherList = weatherList
-        }
-        
         locationManager.delegate = self
         
         if CLLocationManager.locationServicesEnabled() {
@@ -43,10 +37,15 @@ class MainViewController: UIViewController {
             }
         }
         
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositonalLayout())
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .systemBackground
-        view.addSubview(collectionView)
+        CurrentWeather(context: dataStore.viewContext).fetch {
+            weatherList in
+            guard let weatherList = weatherList else { return }
+            self.currentWeatherList = weatherList
+        }
+        
+        creatCollectionView()
+        createDataSource()
+        reloadData()
     }
     
     
@@ -134,6 +133,7 @@ extension MainViewController: CLLocationManagerDelegate {
 
 extension MainViewController {
     
+    
     func reloadData() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, CurrentWeather>()
         snapshot.appendSections([Section.main])
@@ -154,6 +154,13 @@ extension MainViewController {
             collectionView, indexPath, weather in
             return self.configure(WeatherCell.self, with: weather, for: indexPath)
         }
+    }
+    
+    func creatCollectionView() {
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositonalLayout())
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.backgroundColor = .systemBackground
+        view.addSubview(collectionView)
     }
     
 }
