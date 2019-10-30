@@ -25,14 +25,14 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         creatCollectionView()
+        creatCollectionView()
         
         locationManager.delegate = self
         
         isLocationEnabled()
-  
+        
         createDataSource()
-      //  createHeaderDataSource()
+        //createHeaderDataSource()
         
         self.edgesForExtendedLayout = .bottom
         
@@ -49,17 +49,20 @@ class MainViewController: UIViewController {
     
     @IBAction func addLocationButtonPressed(_ sender: Any) {
         
-        if CLLocationManager.locationServicesEnabled() {
-            switch CLLocationManager.authorizationStatus() {
-            case .notDetermined, .restricted, .denied:
-                loadMapViewController()
-                return
-            case .authorizedAlways, .authorizedWhenInUse:
-                locationManager.startUpdatingLocation()
-                isLocation = false
-            default :
-                return
-            }
+        switch locationStatus {
+            
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            
+        case .denied, .restricted:
+            loadMapViewController()
+            
+        case .authorizedAlways, .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+            isLocation = false
+            
+        default:
+            return
         }
     }
     
@@ -67,9 +70,9 @@ class MainViewController: UIViewController {
         if CLLocationManager.locationServicesEnabled() {
             switch CLLocationManager.authorizationStatus() {
             case .notDetermined, .restricted, .denied:
-                configureUI(true)
+                present(Alert.show(.locationError), animated: true)
             case .authorizedAlways, .authorizedWhenInUse:
-                configureUI(false)
+                return
             default :
                 return
             }
@@ -78,23 +81,9 @@ class MainViewController: UIViewController {
     
     @IBAction func enableLocationButtonPressed(_ sender: Any) {
         
-        switch locationStatus {
-            
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-            return
-        case .denied, .restricted:
-            stackView.isHidden = false
-            present(Alert.show(.locationError), animated: true)
-            return
-        case .authorizedAlways, .authorizedWhenInUse:
-            configureUI(false)
-            break
-        default:
-            return
-        }
         
-        locationManager.startUpdatingLocation()
+        
+        // locationManager.startUpdatingLocation()
         
     }
     
@@ -204,7 +193,7 @@ extension MainViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemBackground
         
-//        collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
+        //        collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
         
         collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: WeatherCell.reuseIdentifier)
         
@@ -214,11 +203,6 @@ extension MainViewController {
 }
 
 extension MainViewController {
-    
-    func configureUI(_ showStackView: Bool) {
-        stackView.isHidden = !showStackView
-        collectionView.isHidden = showStackView
-    }
     
     func createCompositonalLayout() -> UICollectionViewLayout {
         
@@ -235,8 +219,8 @@ extension MainViewController {
         layoutSection.interGroupSpacing = 5
         //layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         
-//        let layoutSectionHeader = createSectionHeader()
-//        layoutSection.boundarySupplementaryItems  = [layoutSectionHeader]
+        //        let layoutSectionHeader = createSectionHeader()
+        //        layoutSection.boundarySupplementaryItems  = [layoutSectionHeader]
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 20

@@ -20,10 +20,10 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
         super.init(frame: frame)
         
         let teal = UIColor.systemTeal
-        temperature.font = UIFont.preferredFont(forTextStyle: .title1)
+        temperature.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         temperature.textColor = teal
         
-        city.font = UIFont.preferredFont(forTextStyle: .title2)
+        city.font = UIFont.preferredFont(forTextStyle: .headline)
         
         desc.font = UIFont.preferredFont(forTextStyle: .subheadline)
         
@@ -44,7 +44,7 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
         let hStackMain = UIStackView(arrangedSubviews: [hStack, imageView])
         hStackMain.translatesAutoresizingMaskIntoConstraints = false
         hStackMain.alignment = .center
-        hStackMain.spacing = 78
+        hStackMain.spacing = 16
         contentView.addSubview(hStackMain)
         
         NSLayoutConstraint.activate([
