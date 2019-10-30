@@ -22,10 +22,19 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
         temperature.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         
         city.font = UIFont.preferredFont(forTextStyle: .headline)
-        city.textColor = .label
+        city.textColor = .purple
         
         desc.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        desc.textColor = .secondaryLabel
+        desc.textColor = .purple
+        
+        temperature.textColor = .purple
+        
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.purple.cgColor
+        contentView.layer.cornerRadius = 14
+        
+        imageView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        temperature.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let vStack = UIStackView(arrangedSubviews: [city, desc])
         vStack.axis = .vertical
@@ -35,7 +44,7 @@ class WeatherCell: UICollectionViewCell, DefaultCell {
         let hStackMain = UIStackView(arrangedSubviews: [hStack, imageView])
         hStackMain.translatesAutoresizingMaskIntoConstraints = false
         hStackMain.alignment = .center
-        hStackMain.spacing = 10
+        hStackMain.spacing = 78
         contentView.addSubview(hStackMain)
         
         NSLayoutConstraint.activate([
