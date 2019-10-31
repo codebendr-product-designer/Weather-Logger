@@ -91,7 +91,7 @@ class WeatherViewController: UIViewController {
         
     }
     
-     func deleteSaveWeather(_ id: String) {
+    func deleteSaveWeather(_ id: String) {
         let alert = Alert.show(.weatherDeletion) { _ in
             self.dataStore.delete(CurrentWeather.self, with: id) { completed in
                 DispatchQueue.main.async {
@@ -129,9 +129,10 @@ class WeatherViewController: UIViewController {
     }
     
     @IBAction func useMapButtonPressed(_ sender: Any) {
-        
+        let mapViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        mapViewController.dataStore = self.dataStore
+        self.navigationController?.pushViewController(mapViewController, animated: true)
     }
-    
     
 }
 
@@ -145,7 +146,6 @@ extension WeatherViewController {
             
             restManager.parameters.add(value: "\(coordinate.latitude)", forKey: "lat")
             restManager.parameters.add(value: "\(coordinate.longitude)", forKey: "lon")
-            //  restManager.parameters.add(value: "accra", forKey: "q")
             
             DispatchQueue.main.async {
                 self.configureUI(true)
@@ -162,7 +162,7 @@ extension WeatherViewController {
                     
                     guard let data = results.data else {
                         DispatchQueue.main.async {
-                            
+                            self.present(Alert.show(.general), animated: true)
                         }
                         return
                     }
@@ -178,11 +178,16 @@ extension WeatherViewController {
                                 self.configure(with: response)
                             }
                             
-                        case .failure(let error):
-                            print(error)
+                        case .failure(_):
+                            DispatchQueue.main.async {
+                                self.present(Alert.show(.server), animated: true)
+                            }
                             
                         case .weatherError(let weatherError):
-                            print(weatherError)
+                            DispatchQueue.main.async {
+                                let alert = Alert.show(.weatherDeletion, message: weatherError.message)
+                                self.present(alert, animated: true, completion: nil)
+                            }
                             
                         }
                         
@@ -190,7 +195,7 @@ extension WeatherViewController {
                     
                 } else {
                     DispatchQueue.main.async {
-                        print("general error")
+                        self.present(Alert.show(.general), animated: true)
                     }
                 }
             }

@@ -17,6 +17,7 @@ struct Alert {
         case server
         case pinDeletion
         case weatherDeletion
+        case weather
         case saveError
         case locationError
         case location
@@ -36,8 +37,10 @@ struct Alert {
             return (title: "Save Error", message: "Saving did not work")
         case .locationError :
             return (title: "Location Services disabled", message: "Please use + button to add weather logs")
-            case .location :
-                return (title: "Location Services ", message: "Please use + button to add weather logs")
+        case .location :
+            return (title: "Location Services ", message: "Please use + button to add weather logs")
+        case .weather :
+            return (title: "Weather Services ", message: "Please use + button to add weather logs")
         }
     }
     

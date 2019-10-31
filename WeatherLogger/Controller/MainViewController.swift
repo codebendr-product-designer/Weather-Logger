@@ -11,8 +11,6 @@ import CoreLocation
 
 class MainViewController: UIViewController {
     
-    @IBOutlet weak var stackView: UIStackView!
-    
     var collectionView: UICollectionView!
     let locationManager = CLLocationManager()
     var dataStore: DataStore!
