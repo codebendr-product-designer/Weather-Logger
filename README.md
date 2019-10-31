@@ -14,7 +14,7 @@ Weather Logger saves users weather conditions in their current location or by us
 * If location permission has been granted, app connects to an API and brings weather condition for your current location.
 * If location permission has been denied, app shows you a map which you can Long press to drop a pin on any location.
 
-# Saving 
+## Saving 
 * location data can easily be saved by pressing the save button.
 * saving is done by using core data. 
 * When save is success, a user is navigated to the home page where the save weather is added to a collection view.
@@ -24,11 +24,11 @@ Weather Logger saves users weather conditions in their current location or by us
 * Pressing on any weather in the collection view open up the weather in a detail view 
 * Pressing the delete button on the detail view, deletes a weather condition with confirmation 
 
- # Motivation
+### Motivation
 * By motivation for this project was to leverage of the use of generics and closures to solidify my knowledge.
-* Also challenging myself to use the new diffable data source helped me understand a lot about the direction of the swift language
+* Also challenging myself to use the new diffable data source helped me understand a lot about the direction of the swift language.
 
-
+### Future Improvements
 * Improve Code Readability by using an Architecture like MVVM.
 * Improve Code Readability by using the SOLID principle.
 * Leverage of generics and call backs to add modularity to codebase 
