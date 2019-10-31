@@ -20,29 +20,40 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var txtHumidity: UILabel!
     @IBOutlet weak var btnAction: UIButton!
     
-    let degreesSign = "°"
     var annotation: PinAnnotation!
     var dataStore: DataStore!
     var currentWeather: CurrentWeather!
     var weather: Weather!
     var pin: Pin!
+    var id:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureUI(true)
-        
-        find(location: CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)) {
-            placemark in
+        if let _ = id {
             
-            if let placemark = placemark {
-                self.annotation.title = placemark.locality
+            btnAction.backgroundColor = .red
+            btnAction.titleLabel?.text = "Delete"
+            
+        } else {
+            
+            configureUI(true)
+            
+            find(location: CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)) {
+                placemark in
+                
+                if let placemark = placemark {
+                    self.annotation.title = placemark.locality
+                }
+                
+                self.loadWeather(coordinate: CLLocationCoordinate2D(latitude: self.annotation.coordinate.latitude, longitude: self.annotation.coordinate.longitude))
+                
             }
-            
-            self.loadWeather(coordinate: CLLocationCoordinate2D(latitude: self.annotation.coordinate.latitude, longitude: self.annotation.coordinate.longitude))
             
         }
         
+        //can use pin to retrieve forecase for a specific location?
+        //if not then pin has no use currently
         pin = Pin(context: dataStore.viewContext)
         pin.id = annotation.id
         pin.latitude = annotation.coordinate.latitude
@@ -64,17 +75,43 @@ class WeatherViewController: UIViewController {
         
     }
     
+    fileprivate func deleteSaveWeather(_ id: String) {
+        let alert = Alert.show(.weatherDeletion) { _ in
+            self.dataStore.delete(CurrentWeather.self, with: id) { completed in
+                DispatchQueue.main.async {
+                    if completed {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    } else {
+                        self.present(Alert.show(.general),animated: true)
+                    }
+                }
+            }
+        }
+        self.present(alert, animated: true)
+    }
+    
     @IBAction func btnActionPressed(_ sender: Any) {
         
-        createCurrentWeather()
-        
-        do {
-            try dataStore.viewContext.save()
-            self.navigationController?.popToRootViewController(animated: true)
-        } catch {
-            DispatchQueue.main.async {
-                self.present(Alert.show(.saveError),animated:true)
+        if let id = id {
+            
+            deleteSaveWeather(id)
+            
+            
+        } else {
+            
+            
+            createCurrentWeather()
+            
+            do {
+                try dataStore.viewContext.save()
+                self.navigationController?.popToRootViewController(animated: true)
+            } catch {
+                DispatchQueue.main.async {
+                    self.present(Alert.show(.saveError),animated:true)
+                }
             }
+            
+            
         }
     }
     

@@ -16,8 +16,6 @@ class MainViewController: UIViewController {
     var collectionView: UICollectionView!
     let locationManager = CLLocationManager()
     var dataStore: DataStore!
-    var isLocation = false
-    var isMap = false
     let locationStatus = CLLocationManager.authorizationStatus()
     var currentWeatherList = [CurrentWeather]()
     var dataSource: UICollectionViewDiffableDataSource<Section, CurrentWeather>?
@@ -49,6 +47,9 @@ class MainViewController: UIViewController {
     
     @IBAction func addLocationButtonPressed(_ sender: Any) {
         
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+        
         switch locationStatus {
             
         case .notDetermined:
@@ -58,8 +59,7 @@ class MainViewController: UIViewController {
             loadMapViewController()
             
         case .authorizedAlways, .authorizedWhenInUse:
-            locationManager.startUpdatingLocation()
-            isLocation = false
+            return
             
         default:
             return
@@ -69,13 +69,17 @@ class MainViewController: UIViewController {
     func isLocationEnabled() {
         if CLLocationManager.locationServicesEnabled() {
             switch CLLocationManager.authorizationStatus() {
-            case .notDetermined, .restricted, .denied:
+            case .notDetermined:
+                present(Alert.show(.location), animated: true)
+            case .restricted, .denied:
                 present(Alert.show(.locationError), animated: true)
             case .authorizedAlways, .authorizedWhenInUse:
                 return
             default :
                 return
             }
+        } else {
+            present(Alert.show(.location), animated: true)
         }
     }
     
@@ -93,26 +97,25 @@ extension MainViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        if !isLocation {
+        locationManager.stopUpdatingLocation()
+        locationManager.delegate = nil
+        
+        if let currentLocation = locations.last {
             
-            isLocation = true
             
-            if let currentLocation = locations.last {
-                
-                let annotation = PinAnnotation(coordinate: currentLocation.coordinate)
-                
-                let lon = currentLocation.coordinate.longitude
-                let lat = currentLocation.coordinate.latitude
-                
-                loadWeatherViewController(CLLocation(latitude: lat, longitude: lon), annotation: annotation)
-                
-                locationManager.stopUpdatingLocation()
-            }
+            let annotation = PinAnnotation(coordinate: currentLocation.coordinate)
+            
+            let lon = currentLocation.coordinate.longitude
+            let lat = currentLocation.coordinate.latitude
+            
+            loadWeatherViewController(CLLocation(latitude: lat, longitude: lon), annotation: annotation)
+            
         }
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
+        loadMapViewController()
     }
     
 }
@@ -121,14 +124,13 @@ extension MainViewController {
     
     func loadWeatherViewController(_ location: CLLocation, annotation: PinAnnotation) {
         
+        
         let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
         
         weatherViewController.annotation = annotation
         weatherViewController.dataStore = self.dataStore
+        self.navigationController?.pushViewController(weatherViewController, animated: true)
         
-        DispatchQueue.main.async {
-            self.navigationController?.pushViewController(weatherViewController, animated: true)
-        }
         
     }
     
@@ -136,12 +138,10 @@ extension MainViewController {
         
         let mapViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
         
-        // mapViewController.annotation = annotation
         mapViewController.dataStore = self.dataStore
         
-        DispatchQueue.main.async {
-            self.navigationController?.pushViewController(mapViewController, animated: true)
-        }
+        self.navigationController?.pushViewController(mapViewController, animated: true)
+        
         
     }
 }
@@ -245,6 +245,12 @@ extension MainViewController {
 
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
+        
+        weatherViewController.dataStore = self.dataStore
+        weatherViewController.id = self.currentWeatherList[indexPath.row]
+        self.navigationController?.pushViewController(weatherViewController, animated: true)
         
     }
 }

@@ -30,8 +30,8 @@ class DataStore {
     
     func fetch<T: NSManagedObject>(_ object: T.Type ,_ result: @escaping ([Any]?) -> Void) {
         guard let fetchRequest = T.fetchRequest()  as? NSFetchRequest<T> else {
-                fatalError("fetch error - crash app")
-         }
+            fatalError("fetch error - crash app")
+        }
         //created at is specific to this application
         let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
@@ -44,8 +44,12 @@ class DataStore {
         }
     }
     
-    func delete<T: NSManagedObject>(object: T, with id: String, _ completed: (Bool) -> Void) {
-        let fetchRequest = T.fetchRequest() as! NSFetchRequest<T>
+    func delete<T: NSManagedObject>(_ object: T.Type, with id: String, _ completed: (Bool) -> Void) {
+        
+        guard let fetchRequest = T.fetchRequest()  as? NSFetchRequest<T> else {
+            fatalError("fetch error - crash app")
+        }
+        
         let predicate = NSPredicate(format: "id == %@", id)
         fetchRequest.predicate = predicate
         
