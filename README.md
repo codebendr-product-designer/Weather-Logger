@@ -35,7 +35,7 @@ Weather Logger saves a users weather condition using their current location or a
 * Add a library like Alomofire and Kingfisher to manage caching and network calls.
 
 ### Running the App
-Open WeatherLogger.xcodeproj in Xcode 11 and above and use cmd+r to run the app
+Open WeatherLogger.xcodeproj in Xcode 11 and above and use cmd+R to run the app
 
 
 ### Requirements
