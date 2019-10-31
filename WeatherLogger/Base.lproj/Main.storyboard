@@ -44,72 +44,7 @@
                     <view key="view" contentMode="scaleToFill" id="uph-zS-cJA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="LAt-qJ-pMK">
-                                <rect key="frame" x="97" y="363.5" width="220" height="169"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather Logger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9o-bb-HKc">
-                                        <rect key="frame" x="0.0" y="0.0" width="220" height="33"/>
-                                        <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="28"/>
-                                        <color key="textColor" red="0.068957470879999996" green="0.68160682920000004" blue="0.73334199190000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRP-Gz-rJf">
-                                        <rect key="frame" x="0.0" y="46" width="220" height="70"/>
-                                        <string key="text">Hello, please Enable  
-your current Location to find out 
-about the weather conditions 
-around you.</string>
-                                        <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="15"/>
-                                        <color key="textColor" red="0.068957470879999996" green="0.68160682920000004" blue="0.73334199190000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAN-pm-GGk">
-                                        <rect key="frame" x="0.0" y="129" width="220" height="40"/>
-                                        <color key="backgroundColor" red="0.068957470879999996" green="0.68160682920000004" blue="0.73334199190000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="Mj6-Du-cLx"/>
-                                            <constraint firstAttribute="height" constant="40" id="fyP-Eb-Qr8"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <state key="normal" title="Enable Location">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="13"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="enableLocationButtonPressed:" destination="xGt-QW-VzK" eventType="touchUpInside" id="vvY-IG-KTM"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <view hidden="YES" alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pEK-8A-UUj">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Jd9-VN-HxF">
-                                        <rect key="frame" x="188.5" y="412.5" width="37" height="37"/>
-                                        <color key="color" red="0.33444869519999998" green="0.68160682920000004" blue="0.73334199190000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstItem="Jd9-VN-HxF" firstAttribute="centerY" secondItem="pEK-8A-UUj" secondAttribute="centerY" id="OsF-gD-t2c"/>
-                                    <constraint firstItem="Jd9-VN-HxF" firstAttribute="centerX" secondItem="pEK-8A-UUj" secondAttribute="centerX" id="ram-dd-ILq"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="LAt-qJ-pMK" firstAttribute="centerY" secondItem="uph-zS-cJA" secondAttribute="centerY" id="HEg-JL-8dG"/>
-                            <constraint firstItem="LAt-qJ-pMK" firstAttribute="centerX" secondItem="uph-zS-cJA" secondAttribute="centerX" id="MIt-T5-QHa"/>
-                            <constraint firstItem="pEK-8A-UUj" firstAttribute="leading" secondItem="iyg-aj-60O" secondAttribute="leading" id="Nqa-AZ-2DT"/>
-                            <constraint firstItem="pEK-8A-UUj" firstAttribute="top" secondItem="uph-zS-cJA" secondAttribute="top" id="P2h-qG-f3u"/>
-                            <constraint firstItem="pEK-8A-UUj" firstAttribute="trailing" secondItem="iyg-aj-60O" secondAttribute="trailing" id="Ta4-0J-5ZS"/>
-                            <constraint firstItem="iyg-aj-60O" firstAttribute="bottom" secondItem="pEK-8A-UUj" secondAttribute="bottom" id="V1g-9N-teO"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="iyg-aj-60O"/>
                     </view>
                     <navigationItem key="navigationItem" title="Weather " largeTitleDisplayMode="always" id="pvM-4M-Mi5">
@@ -120,9 +55,6 @@ around you.</string>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <connections>
-                        <outlet property="stackView" destination="LAt-qJ-pMK" id="iaj-nC-Zd4"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6f-jQ-h9T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
