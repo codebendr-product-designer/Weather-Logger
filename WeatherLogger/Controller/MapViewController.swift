@@ -21,7 +21,6 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mapView.delegate = self
         setupMap()
         mapLongPressGesture()
     }
@@ -40,7 +39,7 @@ extension MapViewController {
     // MARK: UILongPressGestureRecognizer
     func mapLongPressGesture() {
         let longPressRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-        longPressRecogniser.minimumPressDuration = 1.0
+        longPressRecogniser.minimumPressDuration = 0.5
         mapView.addGestureRecognizer(longPressRecogniser)
     }
     
