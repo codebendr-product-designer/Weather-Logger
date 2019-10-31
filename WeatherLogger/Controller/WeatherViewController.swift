@@ -49,20 +49,30 @@ class WeatherViewController: UIViewController {
             
         } else {
             
-            configureUI(true)
-            
-            find(location: CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)) {
-                placemark in
+            if RestManager.isNetworkReachable(url: "https://openweathermap.org/") {
                 
-                if let placemark = placemark {
-                    self.annotation.title = placemark.locality
+                configureUI(true)
+                
+                find(location: CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)) {
+                    placemark in
+                    
+                    if let placemark = placemark {
+                        self.annotation.title = placemark.locality
+                    }
+                    
+                    self.loadWeather(coordinate: CLLocationCoordinate2D(latitude: self.annotation.coordinate.latitude, longitude: self.annotation.coordinate.longitude))
+                    
                 }
                 
-                self.loadWeather(coordinate: CLLocationCoordinate2D(latitude: self.annotation.coordinate.latitude, longitude: self.annotation.coordinate.longitude))
+                createPin()
                 
+            } else {
+                present(Alert.show(.networkError, message: "The internet connection is offline") { _ in
+                    DispatchQueue.main.async {
+                        self.navigationController?.popToRootViewController(animated: true)
+                    }
+                }, animated: true)
             }
-            
-            createPin()
             
         }
         

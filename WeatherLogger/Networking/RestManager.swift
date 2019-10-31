@@ -25,7 +25,12 @@ class RestManager {
     var body = Rest()
     var data: Data?
     
-    private func isNetworkReachable(with flags: SCNetworkReachabilityFlags) -> Bool {
+    static func isNetworkReachable(url: String) -> Bool {
+        
+        let reachability = SCNetworkReachabilityCreateWithName(nil, url)
+        var flags = SCNetworkReachabilityFlags()
+        SCNetworkReachabilityGetFlags(reachability!, &flags)
+        
         let isReachable = flags.contains(.reachable)
         let needsConnection = flags.contains(.connectionRequired)
         let canConnectAutomatically = flags.contains(.connectionOnDemand) || flags.contains(.connectionOnTraffic)
@@ -37,28 +42,15 @@ class RestManager {
     func request(url request: URL, with method: HttpMethod, completion: @escaping (_ result: Results) -> Void) {
         let targetURL = addParameters(to: request)
         let httpBody = getBody()
-        
-        
         guard let request = prepare(with: targetURL, httpBody: httpBody, httpMethod: method) else
         {
             completion(Results(withError: CustomError.failedToCreateRequest))
             return
         }
         let session = URLSession(configuration: .default)
-        
-        let reachability = SCNetworkReachabilityCreateWithName(nil, "cyfa.io")
-              var flags = SCNetworkReachabilityFlags()
-              SCNetworkReachabilityGetFlags(reachability!, &flags)
-        
-        if isNetworkReachable(with: flags) {
-        
         session.dataTask(with: request) { (data, response, error) in
             completion(Results(with: data, response: Response(url: response), error: error))
         }.resume()
-            
-        } else {
-            
-        }
     }
     
     private func addParameters(to url: URL) -> URL {
@@ -117,7 +109,6 @@ class RestManager {
     
     enum CustomError: Error {
         case failedToCreateRequest
-        case networkUnAvailable
     }
     
 }
@@ -126,7 +117,6 @@ extension RestManager.CustomError: LocalizedError {
     public var localizedDescription: String {
         switch self {
         case .failedToCreateRequest: return NSLocalizedString("Unable to create the URLRequest object", comment: "")
-        case .networkUnAvailable: return NSLocalizedString("The internet connection is offline", comment: "")
         }
     }
 }
