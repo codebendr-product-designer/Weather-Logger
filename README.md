@@ -1,6 +1,8 @@
 # Weather Logger
 Weather Logger saves users weather conditions in their current location or by using a map. Users can view, save and delete weather conditions.
 
+![](preview.png)
+
 ## Starting the App
 * The app starts with an alert letting the user know to use the add button to start logging locations.
 * When the add button is pressed, a request user location permission is presented to the user to choose from.
@@ -24,14 +26,18 @@ Weather Logger saves users weather conditions in their current location or by us
 * Pressing on any weather in the collection view open up the weather in a detail view 
 * Pressing the delete button on the detail view, deletes a weather condition with confirmation 
 
-### Motivation
-* By motivation for this project was to leverage of the use of generics and closures to solidify my knowledge.
-* Also challenging myself to use the new diffable data source helped me understand a lot about the direction of the swift language.
 
 ### Future Improvements
 * Improve Code Readability by using an Architecture like MVVM.
-* Improve Code Readability by using the SOLID principle.
+* Improve Code Readability by using the SOLID principle, Independency Injection.
 * Leverage of generics and call backs to add modularity to codebase 
 * Add functionality to pull photos and forecast data for a saved location.
 * Add a library like Alomofire and Kingfisher to manage caching and network calls 
+
+
+## Requirements
+
+- Xcode 11 Above
+- iOS 13
+- Swift 5.0
 
