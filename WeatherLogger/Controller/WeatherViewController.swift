@@ -91,7 +91,7 @@ class WeatherViewController: UIViewController {
         
     }
     
-    fileprivate func deleteSaveWeather(_ id: String) {
+     func deleteSaveWeather(_ id: String) {
         let alert = Alert.show(.weatherDeletion) { _ in
             self.dataStore.delete(CurrentWeather.self, with: id) { completed in
                 DispatchQueue.main.async {
@@ -127,6 +127,11 @@ class WeatherViewController: UIViewController {
             
         }
     }
+    
+    @IBAction func useMapButtonPressed(_ sender: Any) {
+        
+    }
+    
     
 }
 

@@ -241,7 +241,11 @@ around you.</string>
                         <viewLayoutGuide key="safeArea" id="RW4-wi-5BT"/>
                     </view>
                     <navigationItem key="navigationItem" id="0tr-eH-8Nb">
-                        <barButtonItem key="rightBarButtonItem" title="Use Map" id="pwW-x2-0M0"/>
+                        <barButtonItem key="rightBarButtonItem" title="Use Map" id="pwW-x2-0M0">
+                            <connections>
+                                <action selector="useMapButtonPressed:" destination="f07-1G-9eB" id="8eY-7q-xp3"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -261,7 +265,7 @@ around you.</string>
         <!--Navigation Controller-->
         <scene sceneID="7ib-YC-aHr">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bi8-1w-F3Z" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MapNavi" automaticallyAdjustsScrollViewInsets="NO" id="bi8-1w-F3Z" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="bookmarks" id="KEw-9O-W93"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="KvC-3w-sKe"/>
@@ -282,7 +286,7 @@ around you.</string>
         <!--Navigation Controller-->
         <scene sceneID="FUt-q2-ff4">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hxA-00-fUq" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainNavi" automaticallyAdjustsScrollViewInsets="NO" id="hxA-00-fUq" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="history" id="Wuq-mv-YMD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5zE-uQ-b9q">
@@ -301,7 +305,7 @@ around you.</string>
         <!--Navigation Controller-->
         <scene sceneID="9jW-Oo-OdO">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mK8-H2-EbF" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="WeatherNavi" automaticallyAdjustsScrollViewInsets="NO" id="mK8-H2-EbF" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OkQ-Jk-2xg">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
