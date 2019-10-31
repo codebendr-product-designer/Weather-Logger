@@ -32,9 +32,24 @@ class DataStore {
         guard let fetchRequest = T.fetchRequest()  as? NSFetchRequest<T> else {
             fatalError("fetch error - crash app")
         }
-        //created at is specific to this application
         let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        do {
+            let list = try viewContext.fetch(fetchRequest)
+            result(list)
+        } catch {
+            result(nil)
+        }
+    }
+    
+    func search<T: NSManagedObject>(_ object: T.Type, with id: String, _ result: @escaping ([Any]?) -> Void) {
+        
+        guard let fetchRequest = T.fetchRequest()  as? NSFetchRequest<T> else {
+            fatalError("fetch error - crash app")
+        }
+        let predicate = NSPredicate(format: "id == %@", id)
+        fetchRequest.predicate = predicate
         
         do {
             let list = try viewContext.fetch(fetchRequest)

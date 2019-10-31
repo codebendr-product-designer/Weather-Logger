@@ -29,7 +29,7 @@ struct Alert {
         case .server :
             return (title: "Server Error", message: "Server returned an error")
         case .pinDeletion :
-            return (title: "Delete Pin", message: "Are you show you want to delete this pin")
+            return (title: "Delete Pin", message: "Are you sure you want to delete this pin")
         case .weatherDeletion :
             return (title: "Delete Weather", message: "Are you show you want to delete this")
         case .saveError :

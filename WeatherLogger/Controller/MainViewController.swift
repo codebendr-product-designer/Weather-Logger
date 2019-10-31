@@ -249,7 +249,7 @@ extension MainViewController: UICollectionViewDelegate {
         let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
         
         weatherViewController.dataStore = self.dataStore
-        weatherViewController.id = self.currentWeatherList[indexPath.row]
+        weatherViewController.id = self.currentWeatherList[indexPath.row].id
         self.navigationController?.pushViewController(weatherViewController, animated: true)
         
     }

@@ -30,10 +30,22 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let _ = id {
+        if let id = id {
             
             btnAction.backgroundColor = .red
-            btnAction.titleLabel?.text = "Delete"
+            btnAction.setTitle("Delete", for: .normal)
+            
+            dataStore.search(CurrentWeather.self, with: id){
+                weatherList in
+                guard let weatherList = weatherList as? [CurrentWeather] else { return }
+                if weatherList.count == 1 {
+                    DispatchQueue.main.async {
+                        self.configure(with: weatherList[0])
+                    }
+                } else {
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+            }
             
         } else {
             
@@ -50,15 +62,19 @@ class WeatherViewController: UIViewController {
                 
             }
             
+            createPin()
+            
         }
         
+    }
+    
+    func createPin() {
         //can use pin to retrieve forecase for a specific location?
         //if not then pin has no use currently
         pin = Pin(context: dataStore.viewContext)
         pin.id = annotation.id
         pin.latitude = annotation.coordinate.latitude
         pin.longitude = annotation.coordinate.longitude
-        
     }
     
     func createCurrentWeather() {
@@ -96,9 +112,7 @@ class WeatherViewController: UIViewController {
             
             deleteSaveWeather(id)
             
-            
         } else {
-            
             
             createCurrentWeather()
             
@@ -110,7 +124,6 @@ class WeatherViewController: UIViewController {
                     self.present(Alert.show(.saveError),animated:true)
                 }
             }
-            
             
         }
     }
@@ -207,9 +220,15 @@ extension WeatherViewController {
         txtHumidity.text = "HUMIDITY \(main.humidity)%"
     }
     
-    
-    
-    
+    func configure(with weather: CurrentWeather ) {
+        txtCity.text = weather.city
+        txtWeatherDescription.text = weather.subtitle
+        txtTemperature.text = weather.temperature.celsius()
+        txtHumidity.text = "HUMIDITY \(weather.humidity!)%"
+        
+        guard let icon = weather.icon else { return }
+        imageView.image = UIImage(data: icon)
+    }
     
 }
 
