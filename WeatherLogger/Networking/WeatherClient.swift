@@ -24,10 +24,6 @@ enum EndPoint: String {
     }
 }
 
-struct WeatherURL {
-    
-}
-
 class WeatherClient {
     static func decode<T:Codable>(_ object: T.Type,data: Data, completion: @escaping (Result<T, Error>) -> Void) {
         do {
