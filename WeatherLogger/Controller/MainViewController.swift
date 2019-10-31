@@ -81,14 +81,6 @@ class MainViewController: UIViewController {
         }
     }
     
-    @IBAction func enableLocationButtonPressed(_ sender: Any) {
-        
-        
-        
-        // locationManager.startUpdatingLocation()
-        
-    }
-    
 }
 
 extension MainViewController: CLLocationManagerDelegate {

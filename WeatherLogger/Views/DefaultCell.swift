@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum Section: CaseIterable {
+    case main
+}
+
 protocol DefaultCell {
     static var reuseIdentifier: String { get }
     func configure(with model: CurrentWeather)

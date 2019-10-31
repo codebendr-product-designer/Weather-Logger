@@ -10,7 +10,6 @@ import MapKit
 
 enum EndPoint: String {
     case weather
-    case forecast
     func get() -> (url:URL?, restManager: RestManager?) {
         
         let restManager = RestManager()
