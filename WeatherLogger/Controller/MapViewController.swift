@@ -56,7 +56,7 @@ extension MapViewController {
             self.mapView.addAnnotation(annotation)
             
             let location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
-          
+            
             Basic.delay(seconds: 2) {
                 self.loadWeatherViewController(location, annotation: annotation)
                 self.mapView.removeAnnotation(annotation)

@@ -25,7 +25,7 @@ enum EndPoint: String {
 }
 
 struct WeatherURL {
-  
+    
 }
 
 class WeatherClient {
@@ -42,10 +42,10 @@ class WeatherClient {
         }
     }
     static func get(_ icon: String) -> String {
-          return "https://openweathermap.org/img/w/\(icon).png"
-      }
+        return "https://openweathermap.org/img/w/\(icon).png"
+    }
     
-      static func load(with coordinate: CLLocationCoordinate2D, completion: (Results)) {
-          
-      }
+    static func load(with coordinate: CLLocationCoordinate2D, completion: (Results)) {
+        
+    }
 }
