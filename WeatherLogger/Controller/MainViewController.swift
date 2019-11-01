@@ -18,6 +18,8 @@ class MainViewController: UIViewController {
     var currentWeatherList = [CurrentWeather]()
     var dataSource: UICollectionViewDiffableDataSource<Section, CurrentWeather>?
     
+    var sectionHeader: SectionHeader?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,7 +30,7 @@ class MainViewController: UIViewController {
         isLocationEnabled()
         
         createDataSource()
-        //createHeaderDataSource()
+        createHeaderDataSource()
         
         self.edgesForExtendedLayout = .bottom
         

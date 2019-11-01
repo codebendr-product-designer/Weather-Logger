@@ -39,8 +39,4 @@ class WeatherClient {
     static func get(_ icon: String) -> String {
         return "https://openweathermap.org/img/w/\(icon).png"
     }
-    
-    static func load(with coordinate: CLLocationCoordinate2D, completion: (Results)) {
-        
-    }
 }

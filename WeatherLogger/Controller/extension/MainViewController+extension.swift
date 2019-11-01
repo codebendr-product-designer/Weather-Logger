@@ -17,6 +17,10 @@ extension MainViewController {
         snapshot.appendSections([Section.main])
         snapshot.appendItems(currentWeatherList)
         
+        if let sectionHeader = self.sectionHeader {
+            sectionHeader.configure(with: currentWeatherList.last)
+        }
+  
         dataSource?.apply(snapshot, animatingDifferences: true)
     }
     
@@ -43,8 +47,9 @@ extension MainViewController {
                 fatalError("Cannot create new header")
             }
             
+            
             sectionHeader.configure(with: self.currentWeatherList.last)
-            sectionHeader.setNeedsLayout()
+            self.sectionHeader = sectionHeader
             return sectionHeader
             
         }
@@ -57,7 +62,7 @@ extension MainViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemBackground
         
-        //        collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
+        collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseIdentifier)
         
         collectionView.register(WeatherCell.self, forCellWithReuseIdentifier: WeatherCell.reuseIdentifier)
         
@@ -109,10 +114,10 @@ extension MainViewController {
         
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
         layoutSection.interGroupSpacing = 5
-        //layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         
-        //        let layoutSectionHeader = createSectionHeader()
-        //        layoutSection.boundarySupplementaryItems  = [layoutSectionHeader]
+        let layoutSectionHeader = createSectionHeader()
+        layoutSection.boundarySupplementaryItems  = [layoutSectionHeader]
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 20
