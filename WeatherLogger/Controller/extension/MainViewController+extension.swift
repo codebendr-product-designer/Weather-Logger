@@ -114,7 +114,7 @@ extension MainViewController {
         
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
         layoutSection.interGroupSpacing = 5
-        layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+       // layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
         
         let layoutSectionHeader = createSectionHeader()
         layoutSection.boundarySupplementaryItems  = [layoutSectionHeader]
