@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		9F42057423664C1800D4414F /* UIStoryboard+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42057323664C1800D4414F /* UIStoryboard+extension.swift */; };
 		9F42057623664C4800D4414F /* UIImageView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42057523664C4800D4414F /* UIImageView+extension.swift */; };
 		9F42057C23664D2700D4414F /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42057B23664D2700D4414F /* DataStore.swift */; };
+		9F66AEAE23716FDF007F940D /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F66AEAD23716FDF007F940D /* WeatherViewModel.swift */; };
 		9F702923236461B500770F64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F702922236461B500770F64 /* AppDelegate.swift */; };
 		9F702925236461B500770F64 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F702924236461B500770F64 /* SceneDelegate.swift */; };
 		9F702927236461B500770F64 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F702926236461B500770F64 /* MapViewController.swift */; };
@@ -48,6 +49,7 @@
 		9F42057323664C1800D4414F /* UIStoryboard+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+extension.swift"; sourceTree = "<group>"; };
 		9F42057523664C4800D4414F /* UIImageView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+extension.swift"; sourceTree = "<group>"; };
 		9F42057B23664D2700D4414F /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		9F66AEAD23716FDF007F940D /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		9F70291F236461B500770F64 /* WeatherLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F702922236461B500770F64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F702924236461B500770F64 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,7 +100,6 @@
 				3F09DE174EA7FFB6C00F8F26 /* Pods-WeatherLogger.debug.xcconfig */,
 				576971A714C8388F3871D9E9 /* Pods-WeatherLogger.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -128,6 +129,14 @@
 			path = extension;
 			sourceTree = "<group>";
 		};
+		9F66AEAC23716FC6007F940D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9F66AEAD23716FDF007F940D /* WeatherViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		9F702916236461B400770F64 = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +158,7 @@
 		9F702921236461B500770F64 /* WeatherLogger */ = {
 			isa = PBXGroup;
 			children = (
+				9F66AEAC23716FC6007F940D /* ViewModel */,
 				9F70293C236463A900770F64 /* Controller */,
 				9F70293B236463A300770F64 /* Model */,
 				9F70293A2364636F00770F64 /* Views */,
@@ -346,6 +356,7 @@
 				9F42057223664BAD00D4414F /* PinAnnotation.swift in Sources */,
 				9F7029462364643C00770F64 /* Response.swift in Sources */,
 				9F7029402364640F00770F64 /* RestManager.swift in Sources */,
+				9F66AEAE23716FDF007F940D /* WeatherViewModel.swift in Sources */,
 				9F70292D236461B500770F64 /* Model.xcdatamodeld in Sources */,
 				9FFE8B8D236B24A500135DEE /* MainViewController+extension.swift in Sources */,
 				9F702925236461B500770F64 /* SceneDelegate.swift in Sources */,
