@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class SectionHeader: UICollectionReusableView {
     static var reuseIdentifier: String = "SectionHeader"
@@ -54,12 +55,15 @@ class SectionHeader: UICollectionReusableView {
         
         let spacing: CGFloat = 16
         
-        NSLayoutConstraint.activate([
-            vStack.leadingAnchor.constraint(equalTo: leadingAnchor,constant: spacing),
-            vStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: spacing),
-            vStack.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
-            vStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: spacing)
-        ])
+//        NSLayoutConstraint.activate([
+//            vStack.leadingAnchor.constraint(equalTo: leadingAnchor,constant: spacing),
+//            vStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: spacing),
+//            vStack.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
+//            vStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: spacing)
+//        ])
+        vStack.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing))
+        }
         
     }
     

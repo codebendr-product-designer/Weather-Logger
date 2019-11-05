@@ -38,12 +38,12 @@ class WeatherViewController: UIViewController {
             dataStore.search(CurrentWeather.self, with: id){
                 weatherList in
                 guard let weatherList = weatherList as? [CurrentWeather] else { return }
-                if weatherList.count == 1 {
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    if weatherList.count == 1 {
                         self.configure(with: weatherList[0])
+                    } else {
+                        self.navigationController?.popToRootViewController(animated: true)
                     }
-                } else {
-                    self.navigationController?.popToRootViewController(animated: true)
                 }
             }
             
