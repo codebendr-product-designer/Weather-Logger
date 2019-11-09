@@ -12,10 +12,11 @@ import CoreLocation
 class MainCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    var dataStore:DataStore!
+    private weak var dataStore:DataStore!
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, dataStore: DataStore) {
         self.navigationController = navigationController
+        self.dataStore = dataStore
     }
 
     func start() {
