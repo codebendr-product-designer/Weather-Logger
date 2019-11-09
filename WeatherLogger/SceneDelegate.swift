@@ -12,14 +12,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     let dataStore = DataStore(modelName: "Model")
-    
+    var coordinator: MainCoordinator?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let scene = (scene as? UIWindowScene) else { return }
         dataStore.load()
-        let navigationController = window?.rootViewController as! UINavigationController
-        let mainViewController = navigationController.topViewController as! MainViewController
-        mainViewController.dataStore = dataStore
+        let navigationController = UINavigationController()
+        coordinator = MainCoordinator(navigationController: navigationController)
+        coordinator?.dataStore = dataStore
+        coordinator?.start()
+        window = UIWindow(frame: scene.coordinateSpace.bounds)
+        window?.windowScene = scene
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
     

@@ -12,6 +12,7 @@ import CoreLocation
 class MainCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+    var dataStore:DataStore!
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -19,6 +20,7 @@ class MainCoordinator: Coordinator {
 
     func start() {
         let vc = MainViewController.instantiate()
+        vc.dataStore = dataStore
         navigationController.pushViewController(vc, animated: false)
     }
 }
