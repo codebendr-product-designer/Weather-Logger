@@ -19,9 +19,9 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let vc = MainViewController.instantiate()
-        vc.dataStore = dataStore
-        navigationController.pushViewController(vc, animated: false)
+        let mainViewController = MainViewController.instantiate()
+        mainViewController.dataStore = dataStore
+        navigationController.pushViewController(mainViewController, animated: false)
     }
 }
 
