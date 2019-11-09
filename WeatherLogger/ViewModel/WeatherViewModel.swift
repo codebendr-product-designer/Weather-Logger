@@ -35,24 +35,35 @@ class WeatherViewModel {
     
     var weather: CurrentWeather
     
+    /*
+     txtCity.text = weather.city
+            txtWeatherDescription.text = weather.subtitle
+            txtTemperature.text = weather.temperature.celsius()
+            txtHumidity.text = "HUMIDITY \(weather.humidity!)%"
+            
+            guard let icon = weather.icon else { return }
+            imageView.image = UIImage(data: icon)
+     */
+     
+    
     init(weather: CurrentWeather) {
         self.weather = weather
     }
     
-    var name: String {
-        return self.order.name
+    var city: String {
+        return weather.city ?? ""
     }
     
-    var size: String {
-        return self.order.size
+    var temperature: String {
+        return weather.temperature.celsius()
     }
     
-    var coffeeName: String {
-        return self.order.coffeeName
+    var humidity: String {
+        return "HUMIDITY \(weather.humidity!)%"
     }
     
-    var total: Double {
-        return self.order.total
+    var icon: Data {
+        return (weather.icon ?? nil) ?? <#default value#> 
     }
 }
 
