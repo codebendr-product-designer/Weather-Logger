@@ -11,8 +11,11 @@ import UIKit
 import CoreLocation
 
 protocol WeatherListViewModelDelegate: class {
-    func preloader(_ isLoading: Bool)
+    func onPreloader(_ isLoading: Bool)
     func onDataFailed()
+    func onWeatherSuccess()
+    func onWeatherFailure()
+    func onWeatherError(weatherError: WeatherError)
 }
 
 final class WeatherViewModel {
@@ -61,7 +64,7 @@ final class WeatherViewModel {
             restManager.parameters.add(value: "\(coordinate.longitude)", forKey: "lon")
             
             DispatchQueue.main.async {
-                self.delegate.preloader(true)
+                self.delegate.onPreloader(true)
             }
             
             restManager.request(url: url, with: .get) {
@@ -70,7 +73,7 @@ final class WeatherViewModel {
                 if results.error == nil {
                     
                     DispatchQueue.main.async {
-                        self.delegate.preloader(false)
+                        self.delegate.onPreloader(false)
                     }
                     
                     guard let data = results.data else {
@@ -89,18 +92,20 @@ final class WeatherViewModel {
                         case .success(let response):
                             self.weather = response
                             DispatchQueue.main.async {
-                                self.configure(with: response)
+                               // self.configure(with: response)
                             }
                             
                         case .failure(_):
                             DispatchQueue.main.async {
-                                self.present(Alert.show(.server), animated: true)
+                                self.delegate.onWeatherFailure()
+                               // self.present(Alert.show(.server), animated: true)
                             }
                             
                         case .weatherError(let weatherError):
                             DispatchQueue.main.async {
-                                let alert = Alert.show(.weatherDeletion, message: weatherError.message)
-                                self.present(alert, animated: true, completion: nil)
+                                self.delegate.onWeatherError(weatherError: weatherError)
+                             //   let alert = Alert.show(.weatherDeletion, message: weatherError.message)
+                             //   self.present(alert, animated: true, completion: nil)
                             }
                             
                         }
