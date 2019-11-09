@@ -205,8 +205,3 @@ extension WeatherViewController {
     }
     
 }
-
-
-
-
-

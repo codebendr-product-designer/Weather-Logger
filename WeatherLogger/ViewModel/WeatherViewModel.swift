@@ -51,7 +51,6 @@ final class WeatherViewModel {
                     guard let data = results.data else {
                         DispatchQueue.main.async {
                             self.delegate.onDataFailed()
-                            // self.present(Alert.show(.general), animated: true)
                         }
                         return
                     }
@@ -69,14 +68,11 @@ final class WeatherViewModel {
                         case .failure(_):
                             DispatchQueue.main.async {
                                 self.delegate.onWeatherFailure()
-                                // self.present(Alert.show(.server), animated: true)
                             }
                             
                         case .weatherError(let weatherError):
                             DispatchQueue.main.async {
                                 self.delegate.onWeatherError(weatherError: weatherError)
-                                //   let alert = Alert.show(.weatherDeletion, message: weatherError.message)
-                                //   self.present(alert, animated: true, completion: nil)
                             }
                             
                         }
@@ -86,7 +82,6 @@ final class WeatherViewModel {
                 } else {
                     DispatchQueue.main.async {
                         self.delegate.onDataFailed()
-                        // self.present(Alert.show(.general), animated: true)
                     }
                 }
             }
