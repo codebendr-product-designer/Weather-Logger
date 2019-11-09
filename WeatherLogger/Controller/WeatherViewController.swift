@@ -59,7 +59,7 @@ class WeatherViewController: UIViewController {
                     if let placemark = placemark {
                         self.annotation.title = placemark.locality
                     }
-
+                    
                     WeatherViewModel(delegate: self).fetch(coordinate: CLLocationCoordinate2D(latitude: self.annotation.coordinate.latitude, longitude: self.annotation.coordinate.longitude))
                     
                 }
