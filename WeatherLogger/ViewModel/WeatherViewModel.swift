@@ -13,7 +13,7 @@ import CoreLocation
 protocol WeatherListViewModelDelegate: class {
     func onPreloader(_ isLoading: Bool)
     func onDataFailed()
-    func onWeatherSuccess(_ main: Main, _ weather: WeatherElement)
+    func onWeatherSuccess(_ response: Weather)
     func onWeatherFailure()
     func onWeatherError(weatherError: WeatherError)
 }
@@ -63,7 +63,7 @@ final class WeatherViewModel {
                             
                         case .success(let response):
                             DispatchQueue.main.async {
-                                  self.delegate.onWeatherSuccess(response.main, response.weather[0])
+                                self.delegate.onWeatherSuccess(response)
                             }
                             
                         case .failure(_):

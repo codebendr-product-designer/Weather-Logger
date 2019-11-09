@@ -24,6 +24,7 @@ class WeatherViewController: UIViewController {
     var dataStore: DataStore!
     var currentWeather: CurrentWeather!
     var weather: Weather!
+    var weatherViewModel: WeatherViewModel!
     var pin: Pin!
     var id:String?
     
@@ -59,8 +60,9 @@ class WeatherViewController: UIViewController {
                     if let placemark = placemark {
                         self.annotation.title = placemark.locality
                     }
-                    
-                    self.loadWeather(coordinate: CLLocationCoordinate2D(latitude: self.annotation.coordinate.latitude, longitude: self.annotation.coordinate.longitude))
+
+                    self.weatherViewModel = WeatherViewModel(delegate: self)
+                    self.weatherViewModel.fetch(coordinate: CLLocationCoordinate2D(latitude: self.annotation.coordinate.latitude, longitude: self.annotation.coordinate.longitude))
                     
                 }
                 
@@ -79,8 +81,6 @@ class WeatherViewController: UIViewController {
     }
     
     func createPin() {
-        //can use pin to retrieve forecase for a specific location?
-        //if not then pin has no use currently
         pin = Pin(context: dataStore.viewContext)
         pin.id = annotation.id
         pin.latitude = annotation.coordinate.latitude
@@ -146,70 +146,34 @@ class WeatherViewController: UIViewController {
     
 }
 
-extension WeatherViewController {
+extension WeatherViewController: WeatherListViewModelDelegate {
     
-    func loadWeather(coordinate: CLLocationCoordinate2D)  {
-        
-        guard let restManager = EndPoint.weather.get().restManager else { return }
-        
-        if let url = EndPoint.weather.get().url {
-            
-            restManager.parameters.add(value: "\(coordinate.latitude)", forKey: "lat")
-            restManager.parameters.add(value: "\(coordinate.longitude)", forKey: "lon")
-            
-            DispatchQueue.main.async {
-                self.configureUI(true)
-            }
-            
-            restManager.request(url: url, with: .get) {
-                results in
-                
-                if results.error == nil {
-                    
-                    DispatchQueue.main.async {
-                        self.configureUI(false)
-                    }
-                    
-                    guard let data = results.data else {
-                        DispatchQueue.main.async {
-                            self.present(Alert.show(.general), animated: true)
-                        }
-                        return
-                    }
-                    
-                    WeatherClient.decode(Weather.self,data: data) {
-                        result in
-                        
-                        switch result {
-                            
-                        case .success(let response):
-                            self.weather = response
-                            DispatchQueue.main.async {
-                                self.configure(with: response)
-                            }
-                            
-                        case .failure(_):
-                            DispatchQueue.main.async {
-                                self.present(Alert.show(.server), animated: true)
-                            }
-                            
-                        case .weatherError(let weatherError):
-                            DispatchQueue.main.async {
-                                let alert = Alert.show(.weatherDeletion, message: weatherError.message)
-                                self.present(alert, animated: true, completion: nil)
-                            }
-                            
-                        }
-                        
-                    }
-                    
-                } else {
-                    DispatchQueue.main.async {
-                        self.present(Alert.show(.general), animated: true)
-                    }
-                }
-            }
-        }
+    func onPreloader(_ isLoading: Bool) {
+        self.configureUI(isLoading)
+    }
+    
+    func onDataFailed() {
+        self.present(Alert.show(.general), animated: true)
+    }
+    
+    func onWeatherSuccess(_ response: Weather) {
+        let weather = response.weather[0]
+        let main = response.main
+        self.weather = response
+        imageView.download(from: WeatherClient.get(weather.icon))
+        txtCity.text = annotation.title
+        txtWeatherDescription.text = weather.desc
+        txtTemperature.text = main.temp.celsius()
+        txtHumidity.text = "HUMIDITY \(main.humidity)%"
+    }
+    
+    func onWeatherFailure() {
+        self.present(Alert.show(.server), animated: true)
+    }
+    
+    func onWeatherError(weatherError: WeatherError) {
+        let alert = Alert.show(.weatherDeletion, message: weatherError.message)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -228,16 +192,6 @@ extension WeatherViewController {
     
     func configureUI(_ isLoading: Bool) {
         loaderView.isHidden = !isLoading
-    }
-    
-    func configure(with response: Weather){
-        let weather = response.weather[0]
-        let main = response.main
-        imageView.download(from: WeatherClient.get(weather.icon))
-        txtCity.text = annotation.title
-        txtWeatherDescription.text = weather.desc
-        txtTemperature.text = main.temp.celsius()
-        txtHumidity.text = "HUMIDITY \(main.humidity)%"
     }
     
     func configure(with weather: CurrentWeather ) {
