@@ -7,51 +7,31 @@
 //
 
 import Foundation
+import UIKit
+import CoreLocation
 
-class WeatherListViewModel {
-    
-    var weatherList = [OrderViewModel]()
-    
-    init() {
-       // fetchOrders()
-    }
-    
-    func fetchWeatherCondition() {
-        
-//        Webservice().getAllOrders { orders in
-//            if let orders = orders {
-//                self.orders = orders.map(OrderViewModel.init)
-//            }
-//
-//        }
-        
-    }
-    
+protocol WeatherListViewModelDelegate: class {
+    func preloader(_ isLoading: Bool)
+    func onDataFailed()
 }
 
-class WeatherViewModel {
+final class WeatherViewModel {
     
     let id = UUID().uuidString
+    let delegate: WeatherListViewModelDelegate
     
-    var weather: CurrentWeather
+    var weather: Weather
     
-    /*
-     txtCity.text = weather.city
-            txtWeatherDescription.text = weather.subtitle
-            txtTemperature.text = weather.temperature.celsius()
-            txtHumidity.text = "HUMIDITY \(weather.humidity!)%"
-            
-            guard let icon = weather.icon else { return }
-            imageView.image = UIImage(data: icon)
-     */
-     
-    
-    init(weather: CurrentWeather) {
+    init(weather: Weather) {
         self.weather = weather
     }
     
     var city: String {
-        return weather.city ?? ""
+        if let city = weather.city {
+            return city
+        } else {
+            return ""
+        }
     }
     
     var temperature: String {
@@ -59,11 +39,82 @@ class WeatherViewModel {
     }
     
     var humidity: String {
-        return "HUMIDITY \(weather.humidity!)%"
+        if let humidity = self.weather.humidity {
+            return String(format: "%.0f", humidity)
+        } else {
+            return ""
+        }
     }
     
-    var icon: Data {
-        return (weather.icon ?? nil) ?? <#default value#> 
+    var icon: Data? {
+        guard let icon = weather.icon else { return nil }
+        return icon
+    }
+    
+    func fetch (coordinate: CLLocationCoordinate2D) {
+        
+        guard let restManager = EndPoint.weather.get().restManager else { return }
+        
+        if let url = EndPoint.weather.get().url {
+            
+            restManager.parameters.add(value: "\(coordinate.latitude)", forKey: "lat")
+            restManager.parameters.add(value: "\(coordinate.longitude)", forKey: "lon")
+            
+            DispatchQueue.main.async {
+                self.delegate.preloader(true)
+            }
+            
+            restManager.request(url: url, with: .get) {
+                results in
+                
+                if results.error == nil {
+                    
+                    DispatchQueue.main.async {
+                        self.delegate.preloader(false)
+                    }
+                    
+                    guard let data = results.data else {
+                        DispatchQueue.main.async {
+                            self.delegate.onDataFailed()
+                            // self.present(Alert.show(.general), animated: true)
+                        }
+                        return
+                    }
+                    
+                    WeatherClient.decode(Weather.self,data: data) {
+                        result in
+                        
+                        switch result {
+                            
+                        case .success(let response):
+                            self.weather = response
+                            DispatchQueue.main.async {
+                                self.configure(with: response)
+                            }
+                            
+                        case .failure(_):
+                            DispatchQueue.main.async {
+                                self.present(Alert.show(.server), animated: true)
+                            }
+                            
+                        case .weatherError(let weatherError):
+                            DispatchQueue.main.async {
+                                let alert = Alert.show(.weatherDeletion, message: weatherError.message)
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                } else {
+                    DispatchQueue.main.async {
+                        self.delegate.onDataFailed()
+                        // self.present(Alert.show(.general), animated: true)
+                    }
+                }
+            }
+        }
     }
 }
 
