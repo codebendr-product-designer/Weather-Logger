@@ -20,7 +20,7 @@ protocol WeatherListViewModelDelegate: class {
 
 final class WeatherViewModel {
     
-    let delegate: WeatherListViewModelDelegate
+    private weak var delegate: WeatherListViewModelDelegate?
     
     init(delegate: WeatherListViewModelDelegate) {
         self.delegate = delegate
@@ -36,7 +36,7 @@ final class WeatherViewModel {
             restManager.parameters.add(value: "\(coordinate.longitude)", forKey: "lon")
             
             DispatchQueue.main.async {
-                self.delegate.onPreloader(true)
+                self.delegate?.onPreloader(true)
             }
             
             restManager.request(url: url, with: .get) {
@@ -45,12 +45,12 @@ final class WeatherViewModel {
                 if results.error == nil {
                     
                     DispatchQueue.main.async {
-                        self.delegate.onPreloader(false)
+                        self.delegate?.onPreloader(false)
                     }
                     
                     guard let data = results.data else {
                         DispatchQueue.main.async {
-                            self.delegate.onDataFailed()
+                            self.delegate?.onDataFailed()
                         }
                         return
                     }
@@ -62,17 +62,17 @@ final class WeatherViewModel {
                             
                         case .success(let response):
                             DispatchQueue.main.async {
-                                self.delegate.onWeatherSuccess(response)
+                                self.delegate?.onWeatherSuccess(response)
                             }
                             
                         case .failure(_):
                             DispatchQueue.main.async {
-                                self.delegate.onWeatherFailure()
+                                self.delegate?.onWeatherFailure()
                             }
                             
                         case .weatherError(let weatherError):
                             DispatchQueue.main.async {
-                                self.delegate.onWeatherError(weatherError: weatherError)
+                                self.delegate?.onWeatherError(weatherError: weatherError)
                             }
                             
                         }
@@ -81,7 +81,7 @@ final class WeatherViewModel {
                     
                 } else {
                     DispatchQueue.main.async {
-                        self.delegate.onDataFailed()
+                        self.delegate?.onDataFailed()
                     }
                 }
             }
