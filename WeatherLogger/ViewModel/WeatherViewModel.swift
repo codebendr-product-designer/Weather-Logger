@@ -13,45 +13,17 @@ import CoreLocation
 protocol WeatherListViewModelDelegate: class {
     func onPreloader(_ isLoading: Bool)
     func onDataFailed()
-    func onWeatherSuccess()
+    func onWeatherSuccess(_ main: Main, _ weather: WeatherElement)
     func onWeatherFailure()
     func onWeatherError(weatherError: WeatherError)
 }
 
 final class WeatherViewModel {
     
-    let id = UUID().uuidString
     let delegate: WeatherListViewModelDelegate
     
-    var weather: Weather
-    
-    init(weather: Weather) {
-        self.weather = weather
-    }
-    
-    var city: String {
-        if let city = weather.city {
-            return city
-        } else {
-            return ""
-        }
-    }
-    
-    var temperature: String {
-        return weather.temperature.celsius()
-    }
-    
-    var humidity: String {
-        if let humidity = self.weather.humidity {
-            return String(format: "%.0f", humidity)
-        } else {
-            return ""
-        }
-    }
-    
-    var icon: Data? {
-        guard let icon = weather.icon else { return nil }
-        return icon
+    init(delegate: WeatherListViewModelDelegate) {
+        self.delegate = delegate
     }
     
     func fetch (coordinate: CLLocationCoordinate2D) {
@@ -90,22 +62,21 @@ final class WeatherViewModel {
                         switch result {
                             
                         case .success(let response):
-                            self.weather = response
                             DispatchQueue.main.async {
-                               // self.configure(with: response)
+                                  self.delegate.onWeatherSuccess(response.main, response.weather[0])
                             }
                             
                         case .failure(_):
                             DispatchQueue.main.async {
                                 self.delegate.onWeatherFailure()
-                               // self.present(Alert.show(.server), animated: true)
+                                // self.present(Alert.show(.server), animated: true)
                             }
                             
                         case .weatherError(let weatherError):
                             DispatchQueue.main.async {
                                 self.delegate.onWeatherError(weatherError: weatherError)
-                             //   let alert = Alert.show(.weatherDeletion, message: weatherError.message)
-                             //   self.present(alert, animated: true, completion: nil)
+                                //   let alert = Alert.show(.weatherDeletion, message: weatherError.message)
+                                //   self.present(alert, animated: true, completion: nil)
                             }
                             
                         }
