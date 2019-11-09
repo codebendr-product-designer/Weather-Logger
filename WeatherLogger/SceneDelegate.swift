@@ -18,8 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         dataStore.load()
         let navigationController = UINavigationController()
-        coordinator = MainCoordinator(navigationController: navigationController)
-        coordinator?.dataStore = dataStore
+        coordinator = MainCoordinator(navigationController: navigationController, dataStore: dataStore)
         coordinator?.start()
         window = UIWindow(frame: scene.coordinateSpace.bounds)
         window?.windowScene = scene

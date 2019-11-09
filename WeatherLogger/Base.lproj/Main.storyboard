@@ -200,6 +200,7 @@
         <!--Navigation Controller-->
         <scene sceneID="7ib-YC-aHr">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hNK-yN-dhg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="MapNavi" automaticallyAdjustsScrollViewInsets="NO" id="bi8-1w-F3Z" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="bookmarks" id="KEw-9O-W93"/>
                     <toolbarItems/>
@@ -214,32 +215,13 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="TZ1-EV-JTu"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hNK-yN-dhg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="700" y="-635"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="FUt-q2-ff4">
-            <objects>
-                <navigationController storyboardIdentifier="MainNavi" automaticallyAdjustsScrollViewInsets="NO" id="hxA-00-fUq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="history" id="Wuq-mv-YMD"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5zE-uQ-b9q">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="xGt-QW-VzK" kind="relationship" relationship="rootViewController" id="M65-UH-yEy"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2vg-MK-zUI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1186" y="51"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="9jW-Oo-OdO">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rxo-QK-NEz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="WeatherNavi" automaticallyAdjustsScrollViewInsets="NO" id="mK8-H2-EbF" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OkQ-Jk-2xg">
@@ -251,7 +233,6 @@
                         <segue destination="f07-1G-9eB" kind="relationship" relationship="rootViewController" id="GwQ-ci-Dqi"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rxo-QK-NEz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="698.55072463768124" y="50.892857142857139"/>
         </scene>
