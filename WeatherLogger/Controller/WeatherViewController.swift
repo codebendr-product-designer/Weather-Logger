@@ -24,7 +24,6 @@ class WeatherViewController: UIViewController {
     var dataStore: DataStore!
     var currentWeather: CurrentWeather!
     var weather: Weather!
-    var weatherViewModel: WeatherViewModel!
     var pin: Pin!
     var id:String?
     
@@ -61,8 +60,7 @@ class WeatherViewController: UIViewController {
                         self.annotation.title = placemark.locality
                     }
 
-                    self.weatherViewModel = WeatherViewModel(delegate: self)
-                    self.weatherViewModel.fetch(coordinate: CLLocationCoordinate2D(latitude: self.annotation.coordinate.latitude, longitude: self.annotation.coordinate.longitude))
+                    WeatherViewModel(delegate: self).fetch(coordinate: CLLocationCoordinate2D(latitude: self.annotation.coordinate.latitude, longitude: self.annotation.coordinate.longitude))
                     
                 }
                 
