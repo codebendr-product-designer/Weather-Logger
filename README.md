@@ -32,9 +32,9 @@ Weather Logger saves a users weather condition using their current location or a
 - [x] Improve UI navigation by using a pattern like Coordinator.
 - [ ] Improve Code Readability by using the SOLID principle and dependency Injection via initialisation.
 - [x] Leverage off generics and call backs to add modularity to codebase. 
-- [] Add a library like Alomofire to handle network calls.
-- [] Add UI Tests
-- [] Add Unit Tests
+- [ ] Add a library like Alomofire to handle network calls.
+- [ ] Add UI Tests
+- [ ] Add Unit Tests
 
 
 ### Requirements
