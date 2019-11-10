@@ -59,7 +59,7 @@ extension MapViewController {
             
             Basic.delay(seconds: 1.5) {
                 //self.loadWeatherViewController(annotation: annotation)
-                self.coordinator?.showMapView()
+                self.coordinator?.showWeatherView(annotation)
                 self.mapView.removeAnnotation(annotation)
             }
         }

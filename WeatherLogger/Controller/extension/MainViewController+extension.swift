@@ -142,10 +142,10 @@ extension MainViewController {
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
+        coordinator?.showWeatherView(nil) { vc in
+            vc.id = self.currentWeatherList[indexPath.row].id
+        }
         
-        weatherViewController.id = self.currentWeatherList[indexPath.row].id
-        self.navigationController?.pushViewController(weatherViewController, animated: true)
         
     }
 }

@@ -25,10 +25,11 @@ class MainCoordinator: Coordinator {
         self.navigationController.pushViewController(mainViewController, animated: false)
     }
     
-    func showWeatherView(annotation: PinAnnotation) {
+    func showWeatherView(_ annotation: PinAnnotation?, configure: (WeatherViewController) -> () = { _ in return }) {
         let vc = WeatherViewController.instantiate()
         vc.coordinator = self
         vc.annotation = annotation
+        configure(vc)
         DispatchQueue.main.async {
             self.navigationController.pushViewController(vc, animated: true)
         }
@@ -142,7 +143,7 @@ extension MainViewController: CLLocationManagerDelegate {
             //  let lat = currentLocation.coordinate.latitude
             
             //     loadWeatherViewController(annotation: annotation)
-            coordinator?.showWeatherView(annotation: annotation)
+            coordinator?.showWeatherView(annotation)
             
         }
         
