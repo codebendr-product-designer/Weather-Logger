@@ -28,11 +28,13 @@ Weather Logger saves a users weather condition using their current location or a
 
 
 ### Future Improvements
-* Improve Code Readability by using an Architecture like MVVM.
-* Improve Code Readability by using the SOLID principle and dependency Injection via initialisation.
-* Leverage off generics and call backs to add modularity to codebase. 
-* Add functionality to pull photos and forecast data for a saved location.
-* Add a library like Alomofire and Kingfisher to manage caching and network calls.
+- [x] Improve Code Readability by using a pattern like MVVM.
+- [x] Improve UI navigation by using a pattern like Coordinator.
+- [ ] Improve Code Readability by using the SOLID principle and dependency Injection via initialisation.
+- [x] Leverage off generics and call backs to add modularity to codebase. 
+- [] Add a library like Alomofire to handle network calls.
+- [] Add UI Tests
+- [] Add Unit Tests
 
 
 ### Requirements
