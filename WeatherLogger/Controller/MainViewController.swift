@@ -136,13 +136,7 @@ extension MainViewController: CLLocationManagerDelegate {
         
         if let currentLocation = locations.last {
             
-            
             let annotation = PinAnnotation(coordinate: currentLocation.coordinate)
-            
-            //   let lon = currentLocation.coordinate.longitude
-            //  let lat = currentLocation.coordinate.latitude
-            
-            //     loadWeatherViewController(annotation: annotation)
             coordinator?.showWeatherView(annotation)
             
         }

@@ -73,33 +73,6 @@ extension MainViewController {
 
 extension MainViewController {
     
-//    func loadWeatherViewController(annotation: PinAnnotation) {
-//
-//
-//        let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
-//
-//        weatherViewController.annotation = annotation
-//        self.navigationController?.pushViewController(weatherViewController, animated: true)
-//        
-//
-//    }
-//
-//    func loadMapViewController() {
-//
-//        let mapViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
-//
-//        mapViewController.dataStore = self.dataStore
-//
-//        self.navigationController?.pushViewController(mapViewController, animated: true)
-//
-//
-//    }
-}
-
-
-
-extension MainViewController {
-    
     func createCompositonalLayout() -> UICollectionViewLayout {
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.43))

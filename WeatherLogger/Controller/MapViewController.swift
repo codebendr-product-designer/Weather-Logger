@@ -52,36 +52,17 @@ extension MapViewController {
         let touchMapCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         
         DispatchQueue.main.async {
+            
             let annotation = PinAnnotation(coordinate: touchMapCoordinate)
             self.mapView.addAnnotation(annotation)
             
-          //  let location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
-            
             Basic.delay(seconds: 1.5) {
-                //self.loadWeatherViewController(annotation: annotation)
                 self.coordinator?.showWeatherView(annotation)
                 self.mapView.removeAnnotation(annotation)
             }
         }
         
     }
-    
-}
-
-extension MapViewController {
-    
-//    func loadWeatherViewController(annotation: PinAnnotation) {
-//
-//        let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
-//
-//        weatherViewController.annotation = annotation
-//        weatherViewController.dataStore = self.dataStore
-//
-//        DispatchQueue.main.async {
-//            self.navigationController?.pushViewController(weatherViewController, animated: true)
-//        }
-//
-//    }
     
 }
 
