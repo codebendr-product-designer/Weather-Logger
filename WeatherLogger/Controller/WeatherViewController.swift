@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import Foundation
 
-class WeatherViewController: UIViewController {
+class WeatherViewController: UIViewController, StoryboardController {
     
     @IBOutlet weak var loaderView: UIView!
     @IBOutlet weak var imageView: UIImageView!
@@ -26,6 +26,7 @@ class WeatherViewController: UIViewController {
     var weather: Weather!
     var pin: Pin!
     var id:String?
+    weak var coordinator: MainCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()

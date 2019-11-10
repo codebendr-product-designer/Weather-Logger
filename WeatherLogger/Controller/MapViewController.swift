@@ -10,13 +10,14 @@ import UIKit
 import MapKit
 import CoreData
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, StoryboardController {
     
     @IBOutlet weak var mapView: MKMapView!
     
     var dataStore: DataStore!
     var annotation:PinAnnotation!
     let regionRadius: CLLocationDistance = 1000000
+    weak var coordinator: MainCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()

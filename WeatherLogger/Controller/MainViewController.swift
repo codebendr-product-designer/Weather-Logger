@@ -36,6 +36,7 @@ class MainViewController: UIViewController, StoryboardController {
     var dataSource: UICollectionViewDiffableDataSource<Section, CurrentWeather>?
     
     var sectionHeader: SectionHeader?
+    weak var coordinator: MainCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
