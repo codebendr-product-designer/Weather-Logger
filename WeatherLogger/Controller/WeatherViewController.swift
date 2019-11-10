@@ -21,7 +21,6 @@ class WeatherViewController: UIViewController, StoryboardController {
     @IBOutlet weak var btnAction: UIButton!
     
     var annotation: PinAnnotation!
-   // var dataStore: DataStore!
     var currentWeather: CurrentWeather!
     var weather: Weather!
     var pin: Pin!

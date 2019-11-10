@@ -33,7 +33,6 @@ class MainCoordinator: Coordinator {
         DispatchQueue.main.async {
             self.navigationController.pushViewController(vc, animated: true)
         }
-        
     }
     
     func showMapView() {
@@ -42,7 +41,6 @@ class MainCoordinator: Coordinator {
         DispatchQueue.main.async {
             self.navigationController.pushViewController(vc, animated: true)
         }
-        
     }
 }
 
