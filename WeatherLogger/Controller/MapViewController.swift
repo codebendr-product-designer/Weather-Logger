@@ -10,6 +10,19 @@ import UIKit
 import MapKit
 import CoreData
 
+class MapCoordinator: Coordinator {
+    var childCoordinators = [Coordinator]()
+    var navigationController: UINavigationController
+
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+
+    func start() {
+        // we'll add code here
+    }
+}
+
 class MapViewController: UIViewController, StoryboardController {
     
     @IBOutlet weak var mapView: MKMapView!
