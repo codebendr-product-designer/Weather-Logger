@@ -13,16 +13,29 @@ class MainCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     private weak var dataStore:DataStore!
-
+    
     init(navigationController: UINavigationController, dataStore: DataStore) {
         self.navigationController = navigationController
         self.dataStore = dataStore
     }
-
+    
     func start() {
         let mainViewController = MainViewController.instantiate()
         mainViewController.dataStore = dataStore
+        mainViewController.coordinator = self
         navigationController.pushViewController(mainViewController, animated: false)
+    }
+    
+    func showWeatherView() {
+        let vc = WeatherViewController.instantiate()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showMapView(){
+        let vc = MapViewController.instantiate()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
     }
 }
 
