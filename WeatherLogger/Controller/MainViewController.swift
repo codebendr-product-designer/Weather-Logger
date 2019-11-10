@@ -25,7 +25,9 @@ class MainCoordinator: Coordinator {
         self.navigationController.pushViewController(mainViewController, animated: false)
     }
     
-    func showWeatherView(_ annotation: PinAnnotation?, configure: (WeatherViewController) -> () = { _ in return }) {
+    typealias WeatherConfiguration = (WeatherViewController) -> ()
+    
+    func showWeatherView(_ annotation: PinAnnotation?, configure: WeatherConfiguration = { _ in return }) {
         let vc = WeatherViewController.instantiate()
         vc.coordinator = self
         vc.annotation = annotation
