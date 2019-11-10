@@ -21,7 +21,7 @@ class WeatherViewController: UIViewController, StoryboardController {
     @IBOutlet weak var btnAction: UIButton!
     
     var annotation: PinAnnotation!
-    var dataStore: DataStore!
+   // var dataStore: DataStore!
     var currentWeather: CurrentWeather!
     var weather: Weather!
     var pin: Pin!
@@ -36,7 +36,7 @@ class WeatherViewController: UIViewController, StoryboardController {
             btnAction.backgroundColor = .red
             btnAction.setTitle("Delete", for: .normal)
             
-            dataStore.search(CurrentWeather.self, with: id){
+            coordinator?.dataStore.search(CurrentWeather.self, with: id){
                 weatherList in
                 guard let weatherList = weatherList as? [CurrentWeather] else { return }
                 DispatchQueue.main.async {
@@ -80,15 +80,16 @@ class WeatherViewController: UIViewController, StoryboardController {
     }
     
     func createPin() {
-        pin = Pin(context: dataStore.viewContext)
+        guard let context = coordinator?.dataStore.viewContext else { return }
+        pin = Pin(context: context)
         pin.id = annotation.id
         pin.latitude = annotation.coordinate.latitude
         pin.longitude = annotation.coordinate.longitude
     }
     
     func createCurrentWeather() {
-        
-        currentWeather = CurrentWeather(context: dataStore.viewContext)
+        guard let context = coordinator?.dataStore.viewContext else { return }
+        currentWeather = CurrentWeather(context: context)
         currentWeather.id = UUID().uuidString
         currentWeather.createdAt = Date()
         currentWeather.pinID = pin.id
@@ -102,7 +103,7 @@ class WeatherViewController: UIViewController, StoryboardController {
     
     func deleteSavedWeather(_ id: String) {
         let alert = Alert.show(.weatherDeletion) { _ in
-            self.dataStore.delete(CurrentWeather.self, with: id) { completed in
+            self.coordinator?.dataStore.delete(CurrentWeather.self, with: id) { completed in
                 DispatchQueue.main.async {
                     if completed {
                         self.navigationController?.popToRootViewController(animated: true)
@@ -126,7 +127,7 @@ class WeatherViewController: UIViewController, StoryboardController {
             createCurrentWeather()
             
             do {
-                try dataStore.viewContext.save()
+                try coordinator?.dataStore.viewContext.save()
                 self.navigationController?.popToRootViewController(animated: true)
             } catch {
                 DispatchQueue.main.async {
@@ -138,9 +139,7 @@ class WeatherViewController: UIViewController, StoryboardController {
     }
     
     @IBAction func useMapButtonPressed(_ sender: Any) {
-        let mapViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
-        mapViewController.dataStore = self.dataStore
-        self.navigationController?.pushViewController(mapViewController, animated: true)
+        coordinator?.showMapView()
     }
     
 }

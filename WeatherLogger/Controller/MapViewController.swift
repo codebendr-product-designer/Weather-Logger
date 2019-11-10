@@ -55,10 +55,11 @@ extension MapViewController {
             let annotation = PinAnnotation(coordinate: touchMapCoordinate)
             self.mapView.addAnnotation(annotation)
             
-            let location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+          //  let location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
             
             Basic.delay(seconds: 1.5) {
-                self.loadWeatherViewController(location, annotation: annotation)
+                //self.loadWeatherViewController(annotation: annotation)
+                self.coordinator?.showMapView()
                 self.mapView.removeAnnotation(annotation)
             }
         }
@@ -69,18 +70,18 @@ extension MapViewController {
 
 extension MapViewController {
     
-    func loadWeatherViewController(_ location: CLLocation, annotation: PinAnnotation) {
-        
-        let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
-        
-        weatherViewController.annotation = annotation
-        weatherViewController.dataStore = self.dataStore
-        
-        DispatchQueue.main.async {
-            self.navigationController?.pushViewController(weatherViewController, animated: true)
-        }
-        
-    }
+//    func loadWeatherViewController(annotation: PinAnnotation) {
+//
+//        let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
+//
+//        weatherViewController.annotation = annotation
+//        weatherViewController.dataStore = self.dataStore
+//
+//        DispatchQueue.main.async {
+//            self.navigationController?.pushViewController(weatherViewController, animated: true)
+//        }
+//
+//    }
     
 }
 

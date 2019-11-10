@@ -73,28 +73,27 @@ extension MainViewController {
 
 extension MainViewController {
     
-    func loadWeatherViewController(_ location: CLLocation, annotation: PinAnnotation) {
-        
-        
-        let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
-        
-        weatherViewController.annotation = annotation
-        weatherViewController.dataStore = self.dataStore
-        self.navigationController?.pushViewController(weatherViewController, animated: true)
-        
-        
-    }
-    
-    func loadMapViewController() {
-        
-        let mapViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
-        
-        mapViewController.dataStore = self.dataStore
-        
-        self.navigationController?.pushViewController(mapViewController, animated: true)
-        
-        
-    }
+//    func loadWeatherViewController(annotation: PinAnnotation) {
+//
+//
+//        let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
+//
+//        weatherViewController.annotation = annotation
+//        self.navigationController?.pushViewController(weatherViewController, animated: true)
+//        
+//
+//    }
+//
+//    func loadMapViewController() {
+//
+//        let mapViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+//
+//        mapViewController.dataStore = self.dataStore
+//
+//        self.navigationController?.pushViewController(mapViewController, animated: true)
+//
+//
+//    }
 }
 
 
@@ -145,7 +144,6 @@ extension MainViewController: UICollectionViewDelegate {
         
         let weatherViewController = UIStoryboard.main.instantiateViewController(withIdentifier: "WeatherViewController") as! WeatherViewController
         
-        weatherViewController.dataStore = self.dataStore
         weatherViewController.id = self.currentWeatherList[indexPath.row].id
         self.navigationController?.pushViewController(weatherViewController, animated: true)
         

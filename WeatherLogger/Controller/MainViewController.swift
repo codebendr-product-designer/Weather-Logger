@@ -12,7 +12,7 @@ import CoreLocation
 class MainCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
-    private weak var dataStore:DataStore!
+    var dataStore:DataStore!
     
     init(navigationController: UINavigationController, dataStore: DataStore) {
         self.navigationController = navigationController
@@ -21,21 +21,27 @@ class MainCoordinator: Coordinator {
     
     func start() {
         let mainViewController = MainViewController.instantiate()
-        mainViewController.dataStore = dataStore
         mainViewController.coordinator = self
-        navigationController.pushViewController(mainViewController, animated: false)
+        self.navigationController.pushViewController(mainViewController, animated: false)
     }
     
-    func showWeatherView() {
+    func showWeatherView(annotation: PinAnnotation) {
         let vc = WeatherViewController.instantiate()
         vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
+        vc.annotation = annotation
+        DispatchQueue.main.async {
+            self.navigationController.pushViewController(vc, animated: true)
+        }
+        
     }
     
-    func showMapView(){
+    func showMapView() {
         let vc = MapViewController.instantiate()
         vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
+        DispatchQueue.main.async {
+            self.navigationController.pushViewController(vc, animated: true)
+        }
+        
     }
 }
 
@@ -43,7 +49,7 @@ class MainViewController: UIViewController, StoryboardController {
     
     var collectionView: UICollectionView!
     let locationManager = CLLocationManager()
-    var dataStore: DataStore!
+    //   var dataStore: DataStore!
     let locationStatus = CLLocationManager.authorizationStatus()
     var currentWeatherList = [CurrentWeather]()
     var dataSource: UICollectionViewDiffableDataSource<Section, CurrentWeather>?
@@ -68,7 +74,7 @@ class MainViewController: UIViewController, StoryboardController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        dataStore.fetch(CurrentWeather.self){
+        coordinator?.dataStore.fetch(CurrentWeather.self){
             weatherList in
             guard let weatherList = weatherList as? [CurrentWeather] else { return }
             self.currentWeatherList = weatherList
@@ -91,7 +97,7 @@ extension MainViewController {
             locationManager.requestWhenInUseAuthorization()
             
         case .denied, .restricted:
-            loadMapViewController()
+            coordinator?.showMapView()
             
         case .authorizedAlways, .authorizedWhenInUse:
             return
@@ -132,17 +138,18 @@ extension MainViewController: CLLocationManagerDelegate {
             
             let annotation = PinAnnotation(coordinate: currentLocation.coordinate)
             
-            let lon = currentLocation.coordinate.longitude
-            let lat = currentLocation.coordinate.latitude
+            //   let lon = currentLocation.coordinate.longitude
+            //  let lat = currentLocation.coordinate.latitude
             
-            loadWeatherViewController(CLLocation(latitude: lat, longitude: lon), annotation: annotation)
+            //     loadWeatherViewController(annotation: annotation)
+            coordinator?.showWeatherView(annotation: annotation)
             
         }
         
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        loadMapViewController()
+        coordinator?.showMapView()
     }
     
 }
