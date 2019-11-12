@@ -64,7 +64,7 @@ class WeatherViewController: UIViewController, StoryboardController {
                     
                 }
                 
-                createPin()
+                coordinator?.dataStore.createPin(with: annotation)
                 
             } else {
                 present(Alert.show(.networkError, message: "The internet connection is offline") { _ in
@@ -78,13 +78,7 @@ class WeatherViewController: UIViewController, StoryboardController {
         
     }
     
-    func createPin() {
-        guard let context = coordinator?.dataStore.viewContext else { return }
-        pin = Pin(context: context)
-        pin.id = annotation.id
-        pin.latitude = annotation.coordinate.latitude
-        pin.longitude = annotation.coordinate.longitude
-    }
+ 
     
     func createCurrentWeather() {
         guard let context = coordinator?.dataStore.viewContext else { return }

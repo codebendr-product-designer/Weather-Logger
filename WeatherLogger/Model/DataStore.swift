@@ -85,6 +85,15 @@ class DataStore {
 }
 
 extension DataStore {
+    func createPin(with annotation: PinAnnotation) {
+        let pin = Pin(context: viewContext)
+        pin.id = annotation.id
+        pin.latitude = annotation.coordinate.latitude
+        pin.longitude = annotation.coordinate.longitude
+    }
+}
+
+extension DataStore {
     func autoSave(interval: TimeInterval = 30) {
         guard interval > 0 else {
             return
