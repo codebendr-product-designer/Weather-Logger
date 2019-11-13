@@ -69,9 +69,9 @@ class DataStore {
         fetchRequest.predicate = predicate
         
         do {
-            let currentWeatherList = try viewContext.fetch(fetchRequest)
-            for currentWeather in currentWeatherList {
-                viewContext.delete(currentWeather)
+            let list = try viewContext.fetch(fetchRequest)
+            for item in list {
+                viewContext.delete(item)
             }
             completed(true)
             try viewContext.save()
